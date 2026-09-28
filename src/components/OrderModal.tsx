@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { X, Send, Plus, Minus, ShoppingBag, MapPin, CheckCircle2, Store } from "lucide-react";
 import { PRODUCTS, CONTACT_INFO, Product } from "@/data/products";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ interface OrderItem {
 }
 
 export default function OrderModal({ isOpen, onClose, selectedProductId }: OrderModalProps) {
+  const { t, language } = useLanguage();
+
   const [items, setItems] = useState<OrderItem[]>([
     {
       productId: "toroslar-jersey-5lt",
@@ -102,26 +105,53 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
     e.preventDefault();
 
     if (!customerAddress.trim()) {
-      alert("Lütfen teslimat adresinizi giriniz.");
+      alert(language === "ru" ? "Пожалуйста, введите адрес доставки." : language === "en" ? "Please enter your delivery address." : "Lütfen teslimat adresinizi giriniz.");
       return;
     }
 
     const itemsSummary = items
       .map((item) => {
         const prod = PRODUCTS.find((p) => p.id === item.productId);
-        return `• ${item.quantity} Adet 5 LT Jersey Süt\n   ↳ Çiftlik: ${prod?.vendorName}\n   ↳ Tutar: ${item.price * item.quantity} TL`;
+        const milkName = language === "ru" ? "5 Л Молоко Джерси" : language === "en" ? "5 LT Jersey Milk" : "5 LT Jersey İnek Sütü";
+        const farmLabel = language === "ru" ? "Ферма" : language === "en" ? "Farm" : "Çiftlik";
+        const priceLabel = language === "ru" ? "Сумма" : language === "en" ? "Amount" : "Tutar";
+        const pieceLabel = language === "ru" ? "шт." : language === "en" ? "pcs" : "Adet";
+        return `• ${item.quantity} ${pieceLabel} ${milkName}\n   ↳ ${farmLabel}: ${prod?.vendorName}\n   ↳ ${priceLabel}: ${item.price * item.quantity} TL`;
       })
       .join("\n\n");
 
-    const message = `🥛 *ALANYA GÜNLÜK SÜT SİPARİŞİ* 🥛\n\n` +
-      `*Müşteri Adı:* ${customerName.trim() || "Belirtilmedi"}\n` +
-      `*Mahalle/Bölge:* ${customerNeighborhood}\n` +
-      `*Teslimat Adresi:* ${customerAddress.trim()}\n` +
-      (customerNote.trim() ? `*Sipariş Notu:* ${customerNote.trim()}\n` : "") +
-      `\n🛒 *SEÇİLEN ÇİFTLİK VE SÜTLER:*\n${itemsSummary}\n\n` +
-      `💰 *GENEL TOPLAM:* ${totalPrice} TL\n` +
-      `📦 *Ödeme Türü:* Kapıda Nakit / IBAN Havale\n\n` +
-      `_Lütfen siparişimi onaylayıp teslimat saatini paylaşır mısınız?_`;
+    let message = "";
+    if (language === "ru") {
+      message = `🥛 *${t.orderModal.whatsappOrderTitle}* 🥛\n\n` +
+        `*Имя клиента:* ${customerName.trim() || "Не указано"}\n` +
+        `*Район в Аланье:* ${customerNeighborhood}\n` +
+        `*Адрес доставки:* ${customerAddress.trim()}\n` +
+        (customerNote.trim() ? `*Примечание:* ${customerNote.trim()}\n` : "") +
+        `\n🛒 *ВЫБРАННЫЕ ФЕРМЫ И МОЛОКО:*\n${itemsSummary}\n\n` +
+        `💰 *ИТОГО К ОПЛАТЕ:* ${totalPrice} TL\n` +
+        `📦 *Оплата:* Наличными курьеру / Перевод на карту\n\n` +
+        `_Подтвердите, пожалуйста, заказ и примерное время доставки._`;
+    } else if (language === "en") {
+      message = `🥛 *${t.orderModal.whatsappOrderTitle}* 🥛\n\n` +
+        `*Customer Name:* ${customerName.trim() || "Not specified"}\n` +
+        `*District / Area:* ${customerNeighborhood}\n` +
+        `*Delivery Address:* ${customerAddress.trim()}\n` +
+        (customerNote.trim() ? `*Order Note:* ${customerNote.trim()}\n` : "") +
+        `\n🛒 *SELECTED FARMS & PRODUCTS:*\n${itemsSummary}\n\n` +
+        `💰 *TOTAL AMOUNT:* ${totalPrice} TL\n` +
+        `📦 *Payment Method:* Cash on Delivery / Bank Transfer\n\n` +
+        `_Please confirm my order and share estimated delivery time._`;
+    } else {
+      message = `🥛 *${t.orderModal.whatsappOrderTitle}* 🥛\n\n` +
+        `*Müşteri Adı:* ${customerName.trim() || "Belirtilmedi"}\n` +
+        `*Mahalle/Bölge:* ${customerNeighborhood}\n` +
+        `*Teslimat Adresi:* ${customerAddress.trim()}\n` +
+        (customerNote.trim() ? `*Sipariş Notu:* ${customerNote.trim()}\n` : "") +
+        `\n🛒 *SEÇİLEN ÇİFTLİK VE SÜTLER:*\n${itemsSummary}\n\n` +
+        `💰 *GENEL TOPLAM:* ${totalPrice} TL\n` +
+        `📦 *Ödeme Türü:* Kapıda Nakit / IBAN Havale\n\n` +
+        `_Lütfen siparişimi onaylayıp teslimat saatini paylaşır mısınız?_`;
+    }
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodedMessage}`;
@@ -143,8 +173,8 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
               <ShoppingBag className="w-5 h-5 text-amber-300" />
             </div>
             <div>
-              <h3 className="font-extrabold text-base leading-snug">Çiftlik Süt Sipariş Formu</h3>
-              <p className="text-xs text-emerald-200">Alanya Geneline Ücretsiz Kapıda Teslimat</p>
+              <h3 className="font-extrabold text-base leading-snug">{t.orderModal.title}</h3>
+              <p className="text-xs text-emerald-200">{t.orderModal.subtitle}</p>
             </div>
           </div>
           <button
@@ -157,12 +187,12 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         </div>
 
         {/* Gövde */}
-        <div className="overflow-y-auto p-5 space-y-5 flex-1">
+        <div className="overflow-y-auto p-4 sm:p-5 space-y-4 sm:space-y-5 flex-1">
           
           {/* Siparişteki Kalemler */}
           <div>
             <label className="text-xs font-bold text-gray-950 uppercase tracking-wider block mb-2">
-              Seçtiğiniz Çiftlik & Süt
+              {t.orderModal.selectedFarm}
             </label>
             <div className="space-y-2.5">
               {items.map((item, idx) => {
@@ -193,7 +223,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
 
                     <div className="flex items-center justify-between pt-2 border-t border-emerald-100">
                       <span className="text-xs text-gray-600 font-semibold">
-                        Birim Fiyat: {item.price} TL
+                        {t.orderModal.unitPrice}: {item.price} TL
                       </span>
 
                       <div className="flex items-center gap-2">
@@ -225,7 +255,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
           {/* Diğer Çiftliği Ekleme Seçeneği */}
           <div>
             <p className="text-xs font-bold text-gray-500 mb-2">
-              Diğer Çiftliğin Sütünü de Ekleyebilirsiniz:
+              {t.orderModal.otherFarmOption}
             </p>
             <div className="grid grid-cols-1 gap-2">
               {PRODUCTS.map((prod) => (
@@ -253,11 +283,11 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
           <form onSubmit={handleSendWhatsapp} id="order-form" className="space-y-3.5">
             <div>
               <label className="block text-xs font-bold text-gray-900 mb-1">
-                Adınız Soyadınız
+                {t.orderModal.nameLabel}
               </label>
               <input
                 type="text"
-                placeholder="Örn: Mehmet Yıldırım"
+                placeholder={t.orderModal.namePlaceholder}
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
                 className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 outline-hidden transition"
@@ -266,7 +296,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
 
             <div>
               <label className="block text-xs font-bold text-gray-900 mb-1">
-                Alanya Mahalleniz / Bölgeniz *
+                {t.orderModal.neighborhoodLabel}
               </label>
               <div className="relative">
                 <select
@@ -286,12 +316,12 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
 
             <div>
               <label className="block text-xs font-bold text-gray-900 mb-1">
-                Teslimat Adresi (Sokak, Bina No, Kat / Daire) *
+                {t.orderModal.addressLabel}
               </label>
               <textarea
                 rows={2}
                 required
-                placeholder="Örn: Saray Mah. Atatürk Cad. Çiçek Apt. No:15 Kat:2"
+                placeholder={t.orderModal.addressPlaceholder}
                 value={customerAddress}
                 onChange={(e) => setCustomerAddress(e.target.value)}
                 className="w-full px-3.5 py-2 text-sm rounded-xl border border-gray-200 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 outline-hidden transition resize-none"
@@ -300,11 +330,11 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
 
             <div>
               <label className="block text-xs font-medium text-gray-600 mb-1">
-                Sipariş Notu (Opsiyonel)
+                {t.orderModal.noteLabel}
               </label>
               <input
                 type="text"
-                placeholder="Örn: Kapıya bırakabilirsiniz / Öğleden önce teslim edilsin"
+                placeholder={t.orderModal.notePlaceholder}
                 value={customerNote}
                 onChange={(e) => setCustomerNote(e.target.value)}
                 className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 focus:border-emerald-600 outline-hidden"
@@ -317,7 +347,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         {/* Alt Toplam & Buton */}
         <div className="p-4 bg-emerald-50/50 border-t border-emerald-100 flex flex-col gap-2.5">
           <div className="flex items-center justify-between px-1">
-            <span className="text-sm font-medium text-gray-600">Toplam Sipariş Tutarı:</span>
+            <span className="text-sm font-medium text-gray-600">{t.orderModal.totalAmount}</span>
             <span className="text-2xl font-black text-emerald-950">{totalPrice} TL</span>
           </div>
 
@@ -327,12 +357,12 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
             className="w-full py-3.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-black text-base flex items-center justify-center gap-2 shadow-lg shadow-emerald-700/25 transition-all"
           >
             <Send className="w-4 h-4" />
-            <span>Siparişi WhatsApp ile Gönder</span>
+            <span>{t.orderModal.sendWhatsappBtn}</span>
           </button>
 
           <p className="text-[11px] text-center text-gray-500 flex items-center justify-center gap-1">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Kapıda nakit veya teslimatta IBAN ile ödeyebilirsiniz.</span>
+            <span>{t.orderModal.paymentNote}</span>
           </p>
         </div>
 

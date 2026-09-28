@@ -31,8 +31,10 @@ import Footer from "@/components/Footer";
 
 import { VENDORS, PRODUCTS, CONTACT_INFO } from "@/data/products";
 import { BLOG_POSTS } from "@/data/blogPosts";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function HomePage() {
+  const { t, language } = useLanguage();
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | undefined>();
 
@@ -42,7 +44,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9FBFA] text-gray-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-20 md:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#F9FBFA] text-gray-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-20 md:pb-0 overflow-x-hidden w-full">
       
       {/* Üst Menü */}
       <Navbar onOpenOrderModal={() => handleOpenOrder()} />
@@ -52,70 +54,70 @@ export default function HomePage() {
         {/* ========================================================= */}
         {/* HERO BÖLÜMÜ - MOBİL ÖNCELİKLİ (MOBILE FIRST) DİZAYN       */}
         {/* ========================================================= */}
-        <section className="relative overflow-hidden pt-4 pb-8 sm:pt-8 sm:pb-16 bg-gradient-to-b from-[#F2F8F5] via-white to-[#F7FAF8]">
+        <section className="relative overflow-hidden pt-3 pb-6 sm:pt-8 sm:pb-16 bg-gradient-to-b from-[#F2F8F5] via-white to-[#F7FAF8]">
           
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+          <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-12 items-center">
               
               {/* SOL SÜTUN */}
-              <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+              <div className="lg:col-span-7 space-y-3 sm:space-y-6">
                 
                 {/* Rozet */}
                 <div>
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] sm:text-xs font-bold shadow-2xs">
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10.5px] sm:text-xs font-bold shadow-2xs">
                     <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 fill-emerald-600 shrink-0" />
-                    <span>Alanya'nın Doğrulanmış Yerel Çiftlikleri</span>
+                    <span>{t.hero.verifiedBadge}</span>
                   </div>
                 </div>
 
-                {/* Büyük Başlık - Mobilde ve Masaüstünde Mükemmel Satır Aralığı */}
-                <h1 className="text-2xl sm:text-4xl xl:text-[46px] 2xl:text-[50px] font-black text-gray-950 tracking-tight leading-[1.22] sm:leading-[1.25]">
-                  <span className="block">Alanya'nın En Taze</span>
-                  <span className="block mt-0.5 sm:mt-1.5">Süt Ürünleri</span>
-                  <span className="block mt-0.5 sm:mt-1.5 text-[#D97706]">
-                    Doğrudan Çiftliklerden
+                {/* Büyük Başlık - Mobilde Ekrana Kusursuz Sığan Ölçekleme */}
+                <h1 className="text-[21px] xs:text-2xl sm:text-4xl xl:text-[46px] 2xl:text-[50px] font-black text-gray-950 tracking-tight leading-[1.2] sm:leading-[1.25]">
+                  <span className="block">{t.hero.titleLine1}</span>
+                  <span className="block mt-0.5 sm:mt-1">{t.hero.titleLine2}</span>
+                  <span className="block mt-0.5 sm:mt-1 text-[#D97706]">
+                    {t.hero.titleLine3}
                   </span>
-                  <span className="block mt-0.5 sm:mt-1.5">Kapınıza!</span>
+                  <span className="block mt-0.5 sm:mt-1">{t.hero.titleLine4}</span>
                 </h1>
 
                 {/* Açıklama */}
-                <p className="text-xs sm:text-base text-gray-600 max-w-xl leading-relaxed">
-                  Alanya'daki yerel üreticilerin günlük Jersey inek sütlerini karşılaştırın, gerçek çiftlik fiyatlarını görün ve tek tıkla WhatsApp üzerinden kapınıza sipariş verin.
+                <p className="text-[11.5px] sm:text-base text-gray-600 max-w-xl leading-snug sm:leading-relaxed">
+                  {t.hero.desc}
                 </p>
 
-                {/* 3 Özellik İkonu - Mobilde Kompakt Yatay Kaydırmalı / Izgara */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
+                {/* 3 Özellik İkonu - Mobilde Kompakt */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3 pt-0.5 sm:pt-1">
                   
                   {/* Anında Sipariş */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100/90 flex items-center justify-center text-amber-600 shrink-0">
-                      <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-500 text-amber-500" />
+                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
+                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-amber-100/90 flex items-center justify-center text-amber-600 shrink-0">
+                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-amber-500 text-amber-500" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] sm:text-xs font-black text-gray-900 leading-tight">Anında Sipariş</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">WhatsApp ile hemen</p>
+                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.instantOrderTitle}</h4>
+                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.instantOrderDesc}</p>
                     </div>
                   </div>
 
                   {/* Şeffaf Fiyatlar */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
-                      <Tag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-700" />
+                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
+                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
+                      <Tag className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] sm:text-xs font-black text-gray-900 leading-tight">Şeffaf Fiyat</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">Çiftlikleri karşılaştır</p>
+                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.transparentPriceTitle}</h4>
+                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.transparentPriceDesc}</p>
                     </div>
                   </div>
 
                   {/* Soğuk Zincir Teslimat */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
-                      <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-700" />
+                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
+                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
+                      <Truck className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] sm:text-xs font-black text-gray-900 leading-tight">Soğuk Zincir</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">Tazelik güvencesi</p>
+                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.coldChainTitle}</h4>
+                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.coldChainDesc}</p>
                     </div>
                   </div>
 
@@ -125,21 +127,21 @@ export default function HomePage() {
                 {/* 2 FİRMANIN KARŞILAŞTIRMASI                                 */}
                 {/* ========================================================= */}
                 
-                {/* MOBİL ÖZEL KART GÖRÜNÜMÜ (Mobilde Tablo Yerine Parmak Dostu Kartlar) */}
-                <div className="block sm:hidden space-y-3 pt-2">
+                {/* MOBİL ÖZEL KART GÖRÜNÜMÜ */}
+                <div className="block sm:hidden space-y-2.5 pt-1">
                   <div className="flex items-center justify-between px-1">
                     <div className="flex items-center gap-1.5">
-                      <Store className="w-4 h-4 text-emerald-700" />
-                      <span className="text-xs font-black text-gray-900">Çiftlik Süt Fiyatları</span>
+                      <Store className="w-3.5 h-3.5 text-emerald-700" />
+                      <span className="text-xs font-black text-gray-900">{t.hero.compareTitle}</span>
                     </div>
-                    <span className="text-[10px] text-emerald-700 font-bold">2 Aktif Üretici</span>
+                    <span className="text-[10px] text-emerald-700 font-bold">{t.hero.activeProducers}</span>
                   </div>
 
                   {/* 1. Toroslar Çiftliği Mobil Kart */}
-                  <div className="p-3.5 rounded-2xl bg-white border border-gray-200 shadow-sm space-y-2.5">
+                  <div className="p-3 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
                           <Image src="/toroslar.jpg" alt="Toroslar Doğal Çiftliği" fill className="object-cover" />
                         </div>
                         <div>
@@ -147,31 +149,31 @@ export default function HomePage() {
                             <h4 className="text-xs font-black text-gray-950">Toroslar Doğal Çiftliği</h4>
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
                           </div>
-                          <span className="text-[10px] text-gray-500 block">Alanya Oba • Jersey İnek Sütü</span>
-                          <span className="text-[10px] text-amber-500 font-bold">★ 4.9 (128 yorum)</span>
+                          <span className="text-[10px] text-gray-500 block leading-tight">{t.table.familyBiz}</span>
+                          <span className="text-[10px] text-amber-500 font-bold">★ 4.9 (128)</span>
                         </div>
                       </div>
 
                       <div className="text-right shrink-0">
                         <span className="text-[10px] text-gray-400 block font-bold">5 LT</span>
-                        <span className="text-xl font-black text-emerald-800">700 TL</span>
+                        <span className="text-lg font-black text-emerald-800">700 TL</span>
                       </div>
                     </div>
 
                     <button
                       onClick={() => handleOpenOrder("toroslar-jersey-5lt")}
-                      className="w-full py-2.5 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                      className="w-full py-2 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs"
                     >
-                      <MessageCircle className="w-4 h-4 fill-white" />
-                      <span>WhatsApp ile Sipariş Ver (700 TL)</span>
+                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                      <span>{t.table.orderBtn} (700 TL)</span>
                     </button>
                   </div>
 
                   {/* 2. Oba Mandırası Mobil Kart */}
-                  <div className="p-3.5 rounded-2xl bg-white border border-gray-200 shadow-sm space-y-2.5">
+                  <div className="p-3 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
                           <Image src="/oba.jpg" alt="Oba Yayla Mandırası" fill className="object-cover" />
                         </div>
                         <div>
@@ -179,23 +181,23 @@ export default function HomePage() {
                             <h4 className="text-xs font-black text-gray-950">Oba Yayla Mandırası</h4>
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
                           </div>
-                          <span className="text-[10px] text-gray-500 block">Alanya Oba • Jersey İnek Sütü</span>
-                          <span className="text-[10px] text-amber-500 font-bold">★ 4.8 (95 yorum)</span>
+                          <span className="text-[10px] text-gray-500 block leading-tight">{t.table.localProd}</span>
+                          <span className="text-[10px] text-amber-500 font-bold">★ 4.8 (95)</span>
                         </div>
                       </div>
 
                       <div className="text-right shrink-0">
                         <span className="text-[10px] text-gray-400 block font-bold">5 LT</span>
-                        <span className="text-xl font-black text-emerald-800">625 TL</span>
+                        <span className="text-lg font-black text-emerald-800">625 TL</span>
                       </div>
                     </div>
 
                     <button
                       onClick={() => handleOpenOrder("oba-jersey-5lt")}
-                      className="w-full py-2.5 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                      className="w-full py-2 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs"
                     >
-                      <MessageCircle className="w-4 h-4 fill-white" />
-                      <span>WhatsApp ile Sipariş Ver (625 TL)</span>
+                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                      <span>{t.table.orderBtn} (625 TL)</span>
                     </button>
                   </div>
                 </div>
@@ -208,14 +210,14 @@ export default function HomePage() {
                     <div className="flex items-center gap-2">
                       <Store className="w-4 h-4 text-emerald-700" />
                       <h3 className="text-xs sm:text-sm font-extrabold text-gray-900">
-                        En Popüler Çiftliklerin Süt Fiyatlarını Karşılaştırın
+                        {t.hero.compareTitle}
                       </h3>
                     </div>
                     <a
                       href="#ciftlikler"
                       className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-0.5 transition"
                     >
-                      <span>Tüm Çiftlikleri Gör</span>
+                      <span>{t.hero.seeAllFarms}</span>
                       <ArrowRight className="w-3 h-3" />
                     </a>
                   </div>
@@ -225,12 +227,12 @@ export default function HomePage() {
                     <table className="w-full text-left text-xs">
                       <thead>
                         <tr className="border-b border-gray-100 text-[10px] uppercase font-bold text-gray-400 bg-gray-50/40">
-                          <th className="py-2.5 px-4">Çiftlik / Üretici</th>
-                          <th className="py-2.5 px-3">Memleket</th>
-                          <th className="py-2.5 px-3">Süt Türü</th>
-                          <th className="py-2.5 px-3">5 LT Fiyatı</th>
-                          <th className="py-2.5 px-3">Değerlendirme</th>
-                          <th className="py-2.5 px-4 text-right">Sipariş</th>
+                          <th className="py-2.5 px-4">{t.table.farmProducer}</th>
+                          <th className="py-2.5 px-3">{t.table.origin}</th>
+                          <th className="py-2.5 px-3">{t.table.milkType}</th>
+                          <th className="py-2.5 px-3">{t.table.price5Lt}</th>
+                          <th className="py-2.5 px-3">{t.table.rating}</th>
+                          <th className="py-2.5 px-4 text-right">{t.table.order}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-100 font-medium">
@@ -255,7 +257,7 @@ export default function HomePage() {
                                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
                                 </div>
                                 <span className="text-[11px] text-gray-500 block leading-tight">
-                                  Aile İşletmesi • 12 Yıllık Deneyim
+                                  {t.table.familyBiz}
                                 </span>
                               </div>
                             </div>
@@ -279,7 +281,7 @@ export default function HomePage() {
                               <span className="text-amber-500 font-bold flex items-center">
                                 ★ 4.9
                               </span>
-                              <span className="text-gray-400 text-[10px]">(128 yorum)</span>
+                              <span className="text-gray-400 text-[10px]">(128)</span>
                             </div>
                           </td>
                           <td className="py-3.5 px-4 text-right whitespace-nowrap">
@@ -288,7 +290,7 @@ export default function HomePage() {
                               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs transition shadow-xs"
                             >
                               <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                              <span>Sipariş Ver</span>
+                              <span>{t.table.orderBtn}</span>
                             </button>
                           </td>
                         </tr>
@@ -313,7 +315,7 @@ export default function HomePage() {
                                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
                                 </div>
                                 <span className="text-[11px] text-gray-500 block leading-tight">
-                                  Yöresel Üretim • Katkısız
+                                  {t.table.localProd}
                                 </span>
                               </div>
                             </div>
@@ -337,7 +339,7 @@ export default function HomePage() {
                               <span className="text-amber-500 font-bold flex items-center">
                                 ★ 4.8
                               </span>
-                              <span className="text-gray-400 text-[10px]">(95 yorum)</span>
+                              <span className="text-gray-400 text-[10px]">(95)</span>
                             </div>
                           </td>
                           <td className="py-3.5 px-4 text-right whitespace-nowrap">
@@ -346,7 +348,7 @@ export default function HomePage() {
                               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs transition shadow-xs"
                             >
                               <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                              <span>Sipariş Ver</span>
+                              <span>{t.table.orderBtn}</span>
                             </button>
                           </td>
                         </tr>
@@ -361,11 +363,11 @@ export default function HomePage() {
 
 
               {/* SAĞ SÜTUN (Mobilde ve Masaüstünde Mükemmel Orantılı Görsel) */}
-              <div className="lg:col-span-5 relative flex flex-col items-center mt-2 lg:mt-0">
+              <div className="lg:col-span-5 relative flex flex-col items-center mt-1 lg:mt-0">
                 
-                {/* Orijinal Yüksek Çözünürlüklü Telefon Renderı */}
+                {/* Orijinal Yüksek Çözünürlüklü Telefon Renderı - Mobilde Ekrana Sığacak Şekilde Ölçekli */}
                 <div 
-                  className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-xl sm:shadow-2xl border border-gray-200/80 cursor-pointer group bg-white"
+                  className="relative w-full max-w-[270px] xs:max-w-[310px] sm:max-w-[420px] lg:max-w-[480px] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-xl sm:shadow-2xl border border-gray-200/80 cursor-pointer group bg-white mx-auto"
                   onClick={() => handleOpenOrder()}
                 >
                   <Image
@@ -379,38 +381,38 @@ export default function HomePage() {
                 </div>
 
                 {/* Sosyal Kanıt Kartı */}
-                <div className="mt-3 sm:mt-4 w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] bg-white rounded-2xl border border-gray-200/90 shadow-sm p-3 sm:p-3.5 flex items-center justify-between gap-2.5 sm:gap-3">
+                <div className="mt-2.5 sm:mt-4 w-full max-w-[270px] xs:max-w-[310px] sm:max-w-[420px] lg:max-w-[480px] bg-white rounded-2xl border border-gray-200/90 shadow-xs p-2.5 sm:p-3.5 flex items-center justify-between gap-2 sm:gap-3 mx-auto">
                   
                   {/* Avatarlar + Yıldızlar */}
                   <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
                     <div className="flex -space-x-1.5 sm:-space-x-2">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-emerald-700 text-white text-[9px] sm:text-[10px] font-bold flex items-center justify-center">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-emerald-700 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
                         EK
                       </div>
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-amber-500 text-white text-[9px] sm:text-[10px] font-bold flex items-center justify-center">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-amber-500 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
                         MY
                       </div>
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-sky-600 text-white text-[9px] sm:text-[10px] font-bold flex items-center justify-center">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-sky-600 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
                         AT
                       </div>
                     </div>
 
                     <div>
-                      <span className="text-[11px] sm:text-xs font-black text-gray-950 block leading-tight">
-                        +5.000
+                      <span className="text-[10.5px] sm:text-xs font-black text-gray-950 block leading-tight">
+                        {t.hero.socialProofCount}
                       </span>
-                      <span className="text-[9px] sm:text-[10px] text-gray-500 font-medium block">
-                        Alanya'da mutlu aile
+                      <span className="text-[8.5px] sm:text-[10px] text-gray-500 font-medium block">
+                        {t.hero.socialProofText}
                       </span>
-                      <div className="flex items-center text-amber-400 text-[9px] sm:text-[10px] mt-0.5">
+                      <div className="flex items-center text-amber-400 text-[8.5px] sm:text-[10px] mt-0.5">
                         ★★★★★
                       </div>
                     </div>
                   </div>
 
                   {/* Alıntı */}
-                  <div className="text-[10px] sm:text-[11px] text-gray-600 italic border-l border-gray-100 pl-2.5 sm:pl-3 leading-snug">
-                    <p>“Gerçek çiftliklerden, gerçek tazelik. Alanya'da böyle bir hizmet harika!”</p>
+                  <div className="text-[9.5px] sm:text-[11px] text-gray-600 italic border-l border-gray-100 pl-2 sm:pl-3 leading-snug">
+                    <p>{t.hero.socialProofQuote}</p>
                   </div>
 
                 </div>
@@ -435,8 +437,8 @@ export default function HomePage() {
                   <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">%100 Taze</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">Günlük sağım</p>
+                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.fresh.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.fresh.desc}</p>
                 </div>
               </div>
 
@@ -446,8 +448,8 @@ export default function HomePage() {
                   <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">Doğrulanmış Çiftlik</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">Güvenilir üretici</p>
+                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.verified.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.verified.desc}</p>
                 </div>
               </div>
 
@@ -457,8 +459,8 @@ export default function HomePage() {
                   <Users className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">Yerel Üretici</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">Alanya çiftçisine katkı</p>
+                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.local.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.local.desc}</p>
                 </div>
               </div>
 
@@ -468,8 +470,8 @@ export default function HomePage() {
                   <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">Katkısız & Doğal</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">Sağlıklı lezzetli</p>
+                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.natural.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.natural.desc}</p>
                 </div>
               </div>
 
@@ -479,8 +481,8 @@ export default function HomePage() {
                   <Snowflake className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
                 </div>
                 <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">Soğuk Zincir</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">Tazelik güvencesi</p>
+                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.coldChain.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.coldChain.desc}</p>
                 </div>
               </div>
 
@@ -496,13 +498,13 @@ export default function HomePage() {
           
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             <span className="text-xs font-extrabold text-emerald-700 uppercase tracking-widest block mb-1.5">
-              Alanya Süt Üreticileri
+              {t.farmsSection.tag}
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-              Anlaşmalı 2 Yerel Çiftliğimiz
+              {t.farmsSection.title}
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-gray-600">
-              Günübirlik sağılan 5 LT Jersey sütlerini doğrudan üretici fiyatıyla sipariş verin.
+              {t.farmsSection.desc}
             </p>
           </div>
 
@@ -548,7 +550,7 @@ export default function HomePage() {
                         <span className="text-2xl sm:text-3xl font-black text-emerald-800">{vendor.price5Lt} TL</span>
                       </div>
                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl">
-                        {vendor.deliveryTime}
+                        {t.farmsSection.sameDayDelivery}
                       </span>
                     </div>
                   </div>
@@ -560,7 +562,7 @@ export default function HomePage() {
                     className="w-full py-3 sm:py-3.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-700/20 transition active:scale-95"
                   >
                     <MessageCircle className="w-4 h-4 fill-white" />
-                    <span>WhatsApp ile Sipariş Ver ({vendor.price5Lt} TL)</span>
+                    <span>{t.farmsSection.orderWithPrice} ({vendor.price5Lt} TL)</span>
                   </button>
                 </div>
               </div>
@@ -571,13 +573,13 @@ export default function HomePage() {
           <div className="mt-10 sm:mt-14 p-5 sm:p-8 bg-gradient-to-r from-emerald-900 to-emerald-950 rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 shadow-xl">
             <div className="space-y-1 text-center sm:text-left">
               <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-400 text-emerald-950 text-[10px] sm:text-xs font-black">
-                Yeni Çiftlik Katılımı
+                {t.farmsSection.producerCallBtn}
               </span>
               <h3 className="text-base sm:text-xl font-black">
-                Siz de Alanya'da Süt Üreticisi misiniz?
+                {t.farmsSection.producerCallTitle}
               </h3>
               <p className="text-emerald-200 text-xs max-w-lg">
-                Çiftliğinizi platformumuza ekleyerek doğrudan Alanya'daki ailelere ulaşın.
+                {t.farmsSection.producerCallDesc}
               </p>
             </div>
             <a
@@ -586,7 +588,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-black text-xs shrink-0 shadow-md transition active:scale-95 whitespace-nowrap"
             >
-              Çiftliğinizi Ekleyin
+              {t.farmsSection.producerCallBtn}
             </a>
           </div>
 
@@ -600,10 +602,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
               <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest block mb-1.5">
-                Basit & Şeffaf
+                {t.howItWorks.tag}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-gray-950">
-                Sistem Nasıl Çalışır?
+                {t.howItWorks.title}
               </h2>
             </div>
 
@@ -612,9 +614,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
                   1
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">Çiftliği ve Fiyatı Seçin</h3>
+                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step1Title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Toroslar Çiftliği (700 TL) veya Oba Mandırası (625 TL) sütünü seçin.
+                  {t.howItWorks.step1Desc}
                 </p>
               </div>
 
@@ -622,9 +624,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
                   2
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">WhatsApp ile Tek Tıkla Sipariş</h3>
+                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step2Title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Mahalle ve adresinizi girin, hazır sipariş mesajınız anında WhatsApp hattımıza iletilsin.
+                  {t.howItWorks.step2Desc}
                 </p>
               </div>
 
@@ -632,9 +634,9 @@ export default function HomePage() {
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
                   3
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">Kapıda Soğuk Teslimat & Ödeme</h3>
+                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step3Title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Sütünüz bozulmadan kapınıza gelsin. Ödemenizi kapıda nakit veya IBAN ile tamamlayın.
+                  {t.howItWorks.step3Desc}
                 </p>
               </div>
             </div>

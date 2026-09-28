@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { CONTACT_INFO } from "@/data/products";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -23,10 +24,12 @@ export const metadata: Metadata = {
     "alanya doğal inek sütü",
     "alanya manda sütü",
     "alanya taze süt kapıda",
-    "alanya köy yumurtası",
     "mahmutlar süt siparişi",
     "oba çiğ süt siparişi",
-    "alanyagunluksut.com"
+    "alanyagunluksut.com",
+    "фермерское молоко аланья",
+    "доставка молока аланья",
+    "fresh milk alanya"
   ],
   authors: [{ name: "Alanya Günlük Süt" }],
   creator: "Alanya Günlük Süt",
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=1200&q=80",
+        url: "/telefon.png",
         width: 1200,
         height: 630,
         alt: "Alanya Günlük Çiğ Süt Dağıtımı",
@@ -56,18 +59,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Alanya Günlük Süt | Taze Çiğ Süt Sipariş Hattı",
     description: "Alanya geneline ücretsiz kapıya teslimat ile katkısız, saf çiftlik sütü.",
-    images: ["https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=1200&q=80"],
+    images: ["/telefon.png"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
@@ -76,12 +72,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Schema.org LocalBusiness JSON-LD for local SEO in Alanya
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Alanya Günlük Süt",
-    "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=800&q=80",
+    "name": "Alanya Günlük Süt Pazaryeri",
+    "image": "https://www.alanyagunluksut.com/telefon.png",
     "telephone": CONTACT_INFO.phone,
     "url": "https://www.alanyagunluksut.com",
     "address": {
@@ -90,27 +85,6 @@ export default function RootLayout({
       "addressRegion": "Antalya",
       "addressCountry": "TR"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 36.5438,
-      "longitude": 31.9998
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "07:00",
-        "closes": "21:00"
-      }
-    ],
     "priceRange": "₺₺",
     "servesCuisine": "Süt Ürünleri, Çiğ Süt, Doğal Gıda"
   };
@@ -123,8 +97,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
-      <body className="antialiased selection:bg-farm-100 selection:text-farm-900">
-        {children}
+      <body className="antialiased selection:bg-emerald-100 selection:text-emerald-900 overflow-x-hidden w-full max-w-full">
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
