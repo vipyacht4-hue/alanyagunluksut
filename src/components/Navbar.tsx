@@ -12,12 +12,12 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onOpenOrderModal }: NavbarProps) {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchVal, setSearchVal] = useState("");
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-2xs w-full overflow-hidden">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-2xs w-full">
       <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           
@@ -154,10 +154,40 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
             {t.nav.blog}
           </Link>
 
-          <div className="pt-2 border-t border-gray-100 flex flex-col gap-2">
+          <div className="pt-3 border-t border-gray-100 flex flex-col gap-2.5">
+            <div>
+              <span className="text-[11px] font-black text-gray-400 uppercase tracking-wider block mb-1.5">
+                Dil Seçimi / Select Language / Выберите язык
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { code: "tr" as const, label: "Türkçe", flag: "🇹🇷" },
+                  { code: "ru" as const, label: "Русский", flag: "🇷🇺" },
+                  { code: "en" as const, label: "English", flag: "🇬🇧" },
+                ].map((item) => (
+                  <button
+                    key={item.code}
+                    type="button"
+                    onClick={() => {
+                      setLanguage(item.code);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
+                      language === item.code
+                        ? "bg-emerald-700 text-white border-emerald-700 shadow-sm"
+                        : "bg-gray-50 text-gray-800 border-gray-200 hover:bg-gray-100"
+                    }`}
+                  >
+                    <span>{item.flag}</span>
+                    <span>{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <a
               href={`tel:${CONTACT_INFO.phone}`}
-              className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 text-xs whitespace-nowrap"
+              className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 text-xs whitespace-nowrap mt-1"
             >
               <Phone className="w-3.5 h-3.5 text-emerald-700" />
               <span>{t.nav.callNow}: {CONTACT_INFO.phoneDisplay}</span>
