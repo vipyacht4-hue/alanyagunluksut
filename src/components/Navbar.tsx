@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MessageCircle, Menu, X, Search } from "lucide-react";
 import { CONTACT_INFO } from "@/data/products";
 import { useLanguage } from "@/context/LanguageContext";
@@ -23,8 +24,15 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
           
           {/* Logo & Marka */}
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-amber-400 text-gray-950 flex items-center justify-center font-black shadow-md shadow-amber-400/20 group-hover:scale-105 transition-transform shrink-0">
-              <span className="text-lg">🥛</span>
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl overflow-hidden bg-white/10 border border-white/20 shadow-md shadow-amber-400/20 group-hover:scale-105 transition-transform shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                alt="Alanya Günlük Süt Logosu"
+                fill
+                sizes="(max-width: 640px) 40px, 48px"
+                className="object-contain p-0.5"
+                priority
+              />
             </div>
             <div className="leading-tight">
               <span className="font-black text-base sm:text-lg text-white tracking-tight block whitespace-nowrap">

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Milk, Phone, MessageCircle, MapPin, Clock, Heart } from "lucide-react";
 import { CONTACT_INFO } from "@/data/products";
 import { BLOG_POSTS } from "@/data/blogPosts";
@@ -13,13 +14,24 @@ export default function Footer() {
           
           {/* Marka & Tanıtım */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-2xl bg-farm-600 flex items-center justify-center text-white">
-                <Milk className="w-6 h-6" />
+            <div className="flex items-center gap-3">
+              <div className="relative w-12 h-12 rounded-2xl overflow-hidden bg-white/10 p-1 border border-white/15 flex items-center justify-center shrink-0">
+                <Image
+                  src="/logo.png"
+                  alt="Alanya Günlük Süt Logosu"
+                  fill
+                  sizes="48px"
+                  className="object-contain p-0.5"
+                />
               </div>
-              <span className="font-extrabold text-xl text-white tracking-tight">
-                Alanya Günlük Süt
-              </span>
+              <div>
+                <span className="font-extrabold text-xl text-white tracking-tight block">
+                  Alanya Günlük Süt
+                </span>
+                <span className="text-[11px] text-emerald-400 font-semibold block">
+                  Doğal Çiftlik Sütü
+                </span>
+              </div>
             </div>
             <p className="text-xs text-farm-200 leading-relaxed">
               Alanya'nın yayla ve çiftliklerinden günübirlik sağılan, katkısız, yağı alınmamış hakiki çiğ süt ve doğal köy ürünlerini soğuk zincirle kapınıza ulaştırıyoruz.

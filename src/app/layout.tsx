@@ -61,6 +61,11 @@ export const metadata: Metadata = {
     description: "Alanya geneline ücretsiz kapıya teslimat ile katkısız, saf çiftlik sütü.",
     images: ["/telefon.png"],
   },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
   robots: {
     index: true,
     follow: true,

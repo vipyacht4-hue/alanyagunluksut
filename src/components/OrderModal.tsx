@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { X, Send, Plus, Minus, ShoppingBag, MapPin, CheckCircle2, Store } from "lucide-react";
 import { PRODUCTS, CONTACT_INFO, Product } from "@/data/products";
 import { useLanguage } from "@/context/LanguageContext";
@@ -161,9 +162,15 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
       >
         {/* Başlık Barı */}
         <div className="bg-[#0b1b16] text-white px-5 py-4 flex items-center justify-between border-b border-emerald-900/40">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
-              <ShoppingBag className="w-5 h-5 text-amber-300" />
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/10 p-0.5 border border-white/20 shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                alt="Alanya Günlük Süt Logo"
+                fill
+                sizes="40px"
+                className="object-contain p-0.5"
+              />
             </div>
             <div>
               <h3 className="font-extrabold text-base leading-snug">{t.orderModal.title}</h3>

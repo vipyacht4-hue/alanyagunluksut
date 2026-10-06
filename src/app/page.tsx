@@ -131,6 +131,27 @@ export default function HomePage() {
                 
                 <div className="w-full max-w-[460px] bg-gradient-to-b from-[#10241D] to-[#0A1713] rounded-3xl border border-emerald-800/40 p-4 sm:p-5 shadow-2xl space-y-3.5">
                   
+                  {/* Marka Header */}
+                  <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                    <div className="flex items-center gap-2.5">
+                      <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-white/10 border border-white/20 shrink-0 flex items-center justify-center">
+                        <Image
+                          src="/logo.png"
+                          alt="Alanya Günlük Süt Logo"
+                          fill
+                          sizes="32px"
+                          className="object-contain p-0.5"
+                        />
+                      </div>
+                      <span className="text-xs font-black text-white tracking-wide">
+                        ALANYA GÜNLÜK SÜT
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
+                      Doğrulanmış Dağıtım
+                    </span>
+                  </div>
+
                   {/* Üst 2'li Mini Kart */}
                   <div className="grid grid-cols-2 gap-2.5">
                     <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
