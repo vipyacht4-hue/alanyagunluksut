@@ -3,12 +3,14 @@
 import React, { useState } from "react";
 import { MapPin, Truck, Calendar, Clock, Search, ShieldCheck } from "lucide-react";
 import { DELIVERY_ZONES, DELIVERY_PROMISES } from "@/data/deliveryAreas";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface DeliveryZonesProps {
   onOpenOrderModal: () => void;
 }
 
 export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZonesProps) {
+  const { language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredZones = DELIVERY_ZONES.filter((zone) =>
@@ -24,13 +26,13 @@ export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZones
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-farm-100 text-farm-800 text-xs font-bold mb-4">
             <Truck className="w-3.5 h-3.5" />
-            <span>Alanya Genelinde Kapıya Teslimat</span>
+            <span>{language === "ru" ? "Доставка до двери по всей Аланье" : language === "en" ? "Doorstep Delivery Across Alanya" : "Alanya Genelinde Kapıya Teslimat"}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-farm-950 tracking-tight">
-            Mahallenize Ne Zaman Geliyoruz?
+            {language === "ru" ? "Когда мы доставляем в ваш район?" : language === "en" ? "When Do We Deliver to Your Area?" : "Mahallenize Ne Zaman Geliyoruz?"}
           </h2>
           <p className="mt-3 text-sm sm:text-base text-gray-600">
-            Sütlerimiz +4°C soğuk zincir donanımlı araçlarımızla Alanya'nın dört bir yanına belirlenen gün ve saat aralıklarında kapınıza kadar getirilir.
+            {language === "ru" ? "Наше парное молоко доставляется в холоде +4°C по графику прямо к вашей двери." : language === "en" ? "Our fresh milk is delivered chilled at +4°C across all Alanya neighborhoods right to your door." : "Sütlerimiz +4°C soğuk zincir donanımlı araçlarımızla Alanya'nın dört bir yanına belirlenen gün ve saat aralıklarında kapınıza kadar getirilir."}
           </p>
         </div>
 
@@ -39,7 +41,7 @@ export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZones
           <div className="relative">
             <input
               type="text"
-              placeholder="Mahallenizi arayın (Örn: Oba, Mahmutlar, Saray)..."
+              placeholder={language === "ru" ? "Поиск вашего района (Оба, Махмутлар, Центр)..." : language === "en" ? "Search your area (Oba, Mahmutlar, Center)..." : "Mahallenizi arayın (Örn: Oba, Mahmutlar, Saray)..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-11 pr-4 py-3 bg-white rounded-2xl border border-farm-200 text-sm focus:border-farm-600 focus:ring-2 focus:ring-farm-200 outline-hidden shadow-xs"
@@ -68,7 +70,7 @@ export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZones
                 </div>
                 {zone.popular && (
                   <span className="text-[10px] font-bold text-farm-700 bg-farm-100 px-2 py-0.5 rounded-md shrink-0">
-                    Hergün
+                    {language === "ru" ? "Каждый день" : language === "en" ? "Daily" : "Hergün"}
                   </span>
                 )}
               </div>
@@ -76,15 +78,15 @@ export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZones
               <div className="mt-4 space-y-2 text-xs text-gray-600">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-3.5 h-3.5 text-farm-600 shrink-0" />
-                  <span><strong>Günler:</strong> {zone.days}</span>
+                  <span><strong>{language === "ru" ? "Дни:" : language === "en" ? "Days:" : "Günler:"}</strong> {zone.days}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-3.5 h-3.5 text-farm-600 shrink-0" />
-                  <span><strong>Saatler:</strong> {zone.timeSlot}</span>
+                  <span><strong>{language === "ru" ? "Время:" : language === "en" ? "Hours:" : "Saatler:"}</strong> {zone.timeSlot}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-farm-600 shrink-0" />
-                  <span><strong>Min. Sipariş:</strong> {zone.minOrder}</span>
+                  <span><strong>{language === "ru" ? "Мин. заказ:" : language === "en" ? "Min Order:" : "Min. Sipariş:"}</strong> {zone.minOrder}</span>
                 </div>
               </div>
 
@@ -93,7 +95,7 @@ export default function DeliveryZonesSection({ onOpenOrderModal }: DeliveryZones
                 onClick={onOpenOrderModal}
                 className="mt-4 w-full py-2 px-3 rounded-xl bg-farm-50 hover:bg-farm-100 text-farm-800 text-xs font-bold transition-colors text-center border border-farm-200"
               >
-                Bu Bölge İçin Sipariş Ver
+                {language === "ru" ? "Заказать в этот район" : language === "en" ? "Order for This Area" : "Bu Bölge İçin Sipariş Ver"}
               </button>
             </div>
           ))}

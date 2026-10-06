@@ -39,7 +39,7 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
                 Alanya Günlük Süt
               </span>
               <span className="text-[9px] sm:text-xs text-amber-400 font-bold tracking-wider uppercase block whitespace-nowrap">
-                Doğal Çiftlik Sütü
+                {language === "ru" ? "Фермерское молоко" : language === "en" ? "Fresh Farm Milk" : "Doğal Çiftlik Sütü"}
               </span>
             </div>
           </Link>
@@ -56,7 +56,7 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
               {t.nav.howItWorks}
             </Link>
             <Link href="/#bolgeler" className="hover:text-white transition whitespace-nowrap">
-              Dağıtım Bölgeleri
+              {language === "ru" ? "Зоны доставки" : language === "en" ? "Delivery Zones" : "Dağıtım Bölgeleri"}
             </Link>
             <Link href="/blog" className="hover:text-white transition whitespace-nowrap">
               {t.nav.blog}
@@ -76,13 +76,13 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
             </a>
 
             <a
-              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
+              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я обращаюсь по линии заказа парного молока в Аланье." : language === "en" ? "Hello, I am contacting you to order fresh daily Jersey milk in Alanya." : "Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-10 px-5 text-xs lg:text-sm font-black text-gray-950 bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] rounded-full transition shadow-lg shadow-amber-500/20 hover:shadow-xl whitespace-nowrap shrink-0 cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-gray-950 text-gray-950 shrink-0" />
-              <span className="whitespace-nowrap">WhatsApp Sipariş Hattı →</span>
+              <span className="whitespace-nowrap">{t.nav.quickOrder} →</span>
             </a>
           </div>
 

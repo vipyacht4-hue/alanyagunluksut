@@ -1,11 +1,16 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Milk, Phone, MessageCircle, MapPin, Clock, Heart } from "lucide-react";
 import { CONTACT_INFO } from "@/data/products";
 import { BLOG_POSTS } from "@/data/blogPosts";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t, language } = useLanguage();
+
   return (
     <footer className="bg-farm-950 text-farm-100 pt-16 pb-24 md:pb-16 border-t border-farm-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,47 +34,47 @@ export default function Footer() {
                   Alanya Günlük Süt
                 </span>
                 <span className="text-[11px] text-emerald-400 font-semibold block">
-                  Doğal Çiftlik Sütü
+                  {language === "ru" ? "Фермерское молоко" : language === "en" ? "Fresh Farm Milk" : "Doğal Çiftlik Sütü"}
                 </span>
               </div>
             </div>
             <p className="text-xs text-farm-200 leading-relaxed">
-              Alanya'nın yayla ve çiftliklerinden günübirlik sağılan, katkısız, yağı alınmamış hakiki çiğ süt ve doğal köy ürünlerini soğuk zincirle kapınıza ulaştırıyoruz.
+              {language === "ru" ? "Натуральное парное цельное молоко и деревенские продукты прямо с ферм Аланьи с бесплатной доставкой на дом." : language === "en" ? "Fresh morning raw farm milk delivered chilled across Alanya directly to your doorstep. 100% pure and additive-free." : "Alanya'nın yayla ve çiftliklerinden günübirlik sağılan, katkısız, yağı alınmamış hakiki çiğ süt ve doğal köy ürünlerini soğuk zincirle kapınıza ulaştırıyoruz."}
             </p>
             <div className="pt-2 text-xs text-farm-300">
-              <p>📍 Alanya / Antalya geneli ücretsiz kapıya teslimat.</p>
+              <p>{language === "ru" ? "📍 Бесплатная доставка по всей Аланье" : language === "en" ? "📍 Free doorstep delivery across Alanya" : "📍 Alanya / Antalya geneli ücretsiz kapıya teslimat."}</p>
             </div>
           </div>
 
           {/* Hızlı Menü */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Hızlı Menü
+              {language === "ru" ? "Быстрое меню" : language === "en" ? "Quick Menu" : "Hızlı Menü"}
             </h4>
             <ul className="space-y-2.5 text-xs text-farm-200">
               <li>
                 <Link href="/" className="hover:text-white transition-colors">
-                  Ana Sayfa
+                  {language === "ru" ? "Главная" : language === "en" ? "Home" : "Ana Sayfa"}
                 </Link>
               </li>
               <li>
                 <Link href="/#urunler" className="hover:text-white transition-colors">
-                  Taze Süt & Ürünlerimiz
+                  {language === "ru" ? "Свежее молоко и продукты" : language === "en" ? "Fresh Milk & Products" : "Taze Süt & Ürünlerimiz"}
                 </Link>
               </li>
               <li>
                 <Link href="/#bolgeler" className="hover:text-white transition-colors">
-                  Alanya Dağıtım Bölgeleri
+                  {language === "ru" ? "Зоны доставки" : language === "en" ? "Delivery Zones" : "Alanya Dağıtım Bölgeleri"}
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-white transition-colors">
-                  Blog & Sağlıklı Yaşam Rehberi
+                  {language === "ru" ? "Блог и гид по здоровью" : language === "en" ? "Blog & Health Guide" : "Blog & Sağlıklı Yaşam Rehberi"}
                 </Link>
               </li>
               <li>
                 <Link href="/#sss" className="hover:text-white transition-colors">
-                  Sıkça Sorulan Sorular
+                  {language === "ru" ? "Частые вопросы (FAQ)" : language === "en" ? "FAQ" : "Sıkça Sorulan Sorular"}
                 </Link>
               </li>
             </ul>
@@ -78,7 +83,7 @@ export default function Footer() {
           {/* SEO Blog Makaleleri */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Faydalı Bilgiler & Blog
+              {language === "ru" ? "Полезные статьи и Блог" : language === "en" ? "Helpful Articles & Blog" : "Faydalı Bilgiler & Blog"}
             </h4>
             <ul className="space-y-2.5 text-xs text-farm-200">
               {BLOG_POSTS.slice(0, 4).map((post) => (
@@ -97,7 +102,7 @@ export default function Footer() {
           {/* İletişim & Sipariş Hattı */}
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">
-              Sipariş & İletişim
+              {language === "ru" ? "Заказ и Контакты" : language === "en" ? "Order & Contact" : "Sipariş & İletişim"}
             </h4>
             <div className="space-y-3 text-xs text-farm-200">
               <a
@@ -106,7 +111,9 @@ export default function Footer() {
               >
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <div>
-                  <div className="text-[10px] text-farm-400">Telefonla Sipariş</div>
+                  <div className="text-[10px] text-farm-400">
+                    {language === "ru" ? "Заказ по телефону" : language === "en" ? "Order by Phone" : "Telefonla Sipariş"}
+                  </div>
                   <div className="font-bold text-sm text-white">{CONTACT_INFO.phoneDisplay}</div>
                 </div>
               </a>
@@ -119,14 +126,18 @@ export default function Footer() {
               >
                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                 <div>
-                  <div className="text-[10px] text-farm-400">WhatsApp Sipariş Hattı</div>
+                  <div className="text-[10px] text-farm-400">
+                    {language === "ru" ? "Линия заказов WhatsApp" : language === "en" ? "WhatsApp Order Line" : "WhatsApp Sipariş Hattı"}
+                  </div>
                   <div className="font-bold text-sm text-white">{CONTACT_INFO.phoneDisplay}</div>
                 </div>
               </a>
 
               <div className="flex items-start gap-2 pt-2 text-[11px] text-farm-300">
                 <Clock className="w-3.5 h-3.5 text-farm-400 shrink-0 mt-0.5" />
-                <span>{CONTACT_INFO.deliveryHours}</span>
+                <span>
+                  {language === "ru" ? "Прием заказов и доставка: 08:00 - 20:00" : language === "en" ? "Delivery & Orders: 08:00 - 20:00 Every day" : CONTACT_INFO.deliveryHours}
+                </span>
               </div>
             </div>
           </div>
@@ -135,9 +146,13 @@ export default function Footer() {
 
         {/* Alt Çizgi & Telif */}
         <div className="mt-12 pt-8 border-t border-farm-900 text-center sm:flex sm:justify-between sm:items-center text-xs text-farm-400">
-          <p>© {new Date().getFullYear()} www.alanyagunluksut.com — Tüm Hakları Saklıdır.</p>
+          <p>
+            © {new Date().getFullYear()} www.alanyagunluksut.com — {language === "ru" ? "Все права защищены." : language === "en" ? "All Rights Reserved." : "Tüm Hakları Saklıdır."}
+          </p>
           <p className="mt-2 sm:mt-0 flex items-center justify-center gap-1">
-            <span>Alanya'da doğallık ve sağlık için sevgiyle üretildi</span>
+            <span>
+              {language === "ru" ? "Сделано с любовью для здоровья в Аланье" : language === "en" ? "Crafted with care in Alanya for natural health" : "Alanya'da doğallık ve sağlık için sevgiyle üretildi"}
+            </span>
             <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
           </p>
         </div>

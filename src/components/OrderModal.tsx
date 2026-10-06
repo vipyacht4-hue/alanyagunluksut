@@ -217,13 +217,13 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
                       </div>
 
                       <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
-                        Günlük Taze
+                        {language === "ru" ? "Свежее" : language === "en" ? "Fresh" : "Günlük Taze"}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-emerald-100">
                       <span className="text-xs text-gray-600 font-semibold">
-                        Adet / Miktar
+                        {language === "ru" ? "Количество" : language === "en" ? "Quantity" : "Adet / Miktar"}
                       </span>
 
                       <div className="flex items-center gap-2">
@@ -270,7 +270,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
                     <span className="text-xs text-gray-500">{prod.vendorLocation} • 5 LT Jersey Süt</span>
                   </div>
                   <span className="text-xs font-black text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg">
-                    + Ekle
+                    {language === "ru" ? "+ Добавить" : language === "en" ? "+ Add" : "+ Ekle"}
                   </span>
                 </button>
               ))}
@@ -347,8 +347,12 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         {/* Alt Sipariş Onay & Buton */}
         <div className="p-4 bg-emerald-50/50 border-t border-emerald-100 flex flex-col gap-2.5">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-bold text-gray-700">Hızlı WhatsApp Doğrulama:</span>
-            <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 px-2.5 py-1 rounded-full">Ücretsiz Kapıda Teslimat</span>
+            <span className="text-xs font-bold text-gray-700">
+              {language === "ru" ? "Быстрое подтверждение WhatsApp:" : language === "en" ? "Fast WhatsApp Confirmation:" : "Hızlı WhatsApp Doğrulama:"}
+            </span>
+            <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 px-2.5 py-1 rounded-full">
+              {language === "ru" ? "Бесплатная доставка" : language === "en" ? "Free Doorstep Delivery" : "Ücretsiz Kapıda Teslimat"}
+            </span>
           </div>
 
           <button

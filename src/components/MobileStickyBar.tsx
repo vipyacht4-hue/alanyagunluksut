@@ -10,7 +10,17 @@ interface MobileStickyBarProps {
 }
 
 export default function MobileStickyBar({ onOpenOrderModal }: MobileStickyBarProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const getWhatsappMsg = () => {
+    if (language === "ru") {
+      return "Здравствуйте, я хочу заказать парное фермерское молоко в Аланье.";
+    }
+    if (language === "en") {
+      return "Hello, I would like to order fresh daily farm milk in Alanya.";
+    }
+    return "Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.";
+  };
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-gray-200 px-3 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_25px_rgba(0,0,0,0.12)]">
@@ -27,7 +37,7 @@ export default function MobileStickyBar({ onOpenOrderModal }: MobileStickyBarPro
 
         {/* WhatsApp Hızlı Sipariş Butonu */}
         <a
-          href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.")}`}
+          href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(getWhatsappMsg())}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-[#F59E0B] active:bg-[#D97706] text-gray-950 font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition-transform active:scale-[0.98] whitespace-nowrap"

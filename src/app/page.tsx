@@ -28,7 +28,7 @@ import { BLOG_POSTS } from "@/data/blogPosts";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function HomePage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | undefined>();
 
@@ -64,38 +64,38 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-black shadow-xs">
                     <span className="text-sm">🏆</span>
-                    <span>Alanya'nın Doğrulanmış Yerel Çiftlikleri</span>
+                    <span>{t.hero.verifiedBadge}</span>
                   </div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Alanya Geneli Ücretsiz Kapıda Teslimat</span>
+                    <span>{language === "ru" ? "Бесплатная доставка по всей Аланье" : language === "en" ? "Free Doorstep Delivery Across Alanya" : "Alanya Geneli Ücretsiz Kapıda Teslimat"}</span>
                   </div>
                 </div>
 
                 {/* Büyük Başlık */}
                 <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[54px] font-black text-white tracking-tight leading-[1.15] sm:leading-[1.18]">
-                  <span>Tüm Doğal Süt</span>
-                  <span className="block mt-1 sm:mt-1.5">İhtiyacınız</span>
+                  <span>{t.hero.titleLine1}</span>
+                  <span className="block mt-1 sm:mt-1.5">{t.hero.titleLine2}</span>
                   <span className="block mt-1 sm:mt-1.5 text-[#F59E0B]">
-                    Tek Platformda
+                    {t.hero.titleLine3}
                   </span>
                 </h1>
 
                 {/* Açıklama */}
                 <p className="text-xs sm:text-base text-gray-300 max-w-xl leading-relaxed">
-                  Alanya'daki yerel üreticilerin günlük Jersey inek sütleri, soğuk zincirle el değmeden doğrudan kapınıza teslim. Günlük taze sağım, %100 katkısız. Güncel fiyat ve hızlı teslimat için doğrudan sipariş hattımıza ulaşın.
+                  {t.hero.desc}
                 </p>
 
                 {/* Aksiyon Butonları */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                   <a
-                    href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
+                    href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать парное фермерское молоко в Аланье." : language === "en" ? "Hello, I would like to order fresh daily farm milk in Alanya." : "Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base shadow-xl shadow-amber-500/20 active:scale-95 transition cursor-pointer"
                   >
                     <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950 shrink-0" />
-                    <span>WhatsApp Sipariş Hattı →</span>
+                    <span>{t.hero.orderNow} →</span>
                   </a>
 
                   <a
@@ -103,7 +103,7 @@ export default function HomePage() {
                     className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/15 active:bg-white/20 text-white font-bold text-sm sm:text-base border border-white/20 transition"
                   >
                     <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>0533 252 66 20 Ara</span>
+                    <span>{CONTACT_INFO.phoneDisplay} {t.nav.callNow}</span>
                   </a>
                 </div>
 
@@ -111,15 +111,15 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-xs sm:text-sm text-gray-400 font-medium">
                   <div className="flex items-center gap-1.5 text-gray-300">
                     <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>Günlük Taze Sağım</span>
+                    <span>{t.badges.fresh.title}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-gray-300">
                     <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>+4°C Soğuk Zincir</span>
+                    <span>+4°C {t.badges.coldChain.title}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-gray-300">
                     <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span>Kapıda Kolay Ödeme</span>
+                    <span>{language === "ru" ? "Оплата при получении" : language === "en" ? "Easy Doorstep Payment" : "Kapıda Kolay Ödeme"}</span>
                   </div>
                 </div>
 
@@ -148,7 +148,7 @@ export default function HomePage() {
                       </span>
                     </div>
                     <span className="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
-                      Doğrulanmış Dağıtım
+                      {language === "ru" ? "Проверено" : language === "en" ? "Verified" : "Doğrulanmış Dağıtım"}
                     </span>
                   </div>
 
@@ -157,26 +157,26 @@ export default function HomePage() {
                     <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
                       <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold mb-1">
                         <span>🥛</span>
-                        <span>Bugünkü Sağım</span>
+                        <span>{language === "ru" ? "Утренний удой" : language === "en" ? "Daily Milking" : "Bugünkü Sağım"}</span>
                       </div>
                       <div className="text-lg font-black text-white">5 LT Jersey</div>
-                      <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">Aynı Gün Teslimat</span>
+                      <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">{t.farmsSection.sameDayDelivery}</span>
                     </div>
 
                     <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
                       <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold mb-1">
                         <span>🌿</span>
-                        <span>Doğallık Oranı</span>
+                        <span>{language === "ru" ? "Чистота" : language === "en" ? "Purity" : "Doğallık Oranı"}</span>
                       </div>
-                      <div className="text-lg font-black text-emerald-400">%100 Saf</div>
-                      <span className="text-[10px] text-gray-400 block mt-0.5">Katkısız Çiğ Süt</span>
+                      <div className="text-lg font-black text-emerald-400">100%</div>
+                      <span className="text-[10px] text-gray-400 block mt-0.5">{language === "ru" ? "Без добавок" : language === "en" ? "Raw Milk" : "Katkısız Çiğ Süt"}</span>
                     </div>
                   </div>
 
                   {/* Görsel Çerçevesi (Telefon Görseli) */}
                   <div 
                     onClick={() => {
-                      window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.")}`, "_blank");
+                      window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать парное фермерское молоко в Аланье." : language === "en" ? "Hello, I would like to order fresh farm milk in Alanya." : "Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.")}`, "_blank");
                     }}
                     className="relative rounded-2xl overflow-hidden border border-white/15 bg-black cursor-pointer group shadow-lg"
                   >
@@ -191,11 +191,11 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3.5 sm:p-4">
                       <div className="w-full flex items-center justify-between text-white">
                         <div>
-                          <span className="text-[11px] font-bold text-amber-400 block">Alanya Süt Hattı</span>
-                          <span className="text-xs font-black">Toroslar & Oba Çiftlikleri</span>
+                          <span className="text-[11px] font-bold text-amber-400 block">{language === "ru" ? "Линия молока" : language === "en" ? "Alanya Milk Line" : "Alanya Süt Hattı"}</span>
+                          <span className="text-xs font-black">Toroslar & Oba</span>
                         </div>
                         <span className="text-xs font-black bg-[#F59E0B] text-gray-950 px-3 py-1.5 rounded-xl shadow-md">
-                          Sipariş Ver →
+                          {language === "ru" ? "Заказать →" : language === "en" ? "Order Now →" : "Sipariş Ver →"}
                         </span>
                       </div>
                     </div>
@@ -204,7 +204,7 @@ export default function HomePage() {
                   {/* 2 Çiftlik Seçim Önizlemesi */}
                   <div className="space-y-2 pt-1">
                     <a
-                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
+                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать 5 Л молока фермы Toroslar в Аланье." : language === "en" ? "Hello, I would like to order Toroslar Farm 5 LT Jersey milk." : "Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group"
@@ -215,16 +215,16 @@ export default function HomePage() {
                         </div>
                         <div>
                           <span className="text-xs font-extrabold text-white block group-hover:text-amber-400 transition">Toroslar Doğal Çiftliği</span>
-                          <span className="text-[10px] text-gray-400">Alanya Oba • Jersey Sütü</span>
+                          <span className="text-[10px] text-gray-400">{language === "ru" ? "Аланья Оба • Молоко Джерси" : language === "en" ? "Alanya Oba • Jersey Milk" : "Alanya Oba • Jersey Sütü"}</span>
                         </div>
                       </div>
                       <span className="text-[11px] font-black text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-lg">
-                        Sipariş Yaz →
+                        {language === "ru" ? "Заказ →" : language === "en" ? "Order →" : "Sipariş Yaz →"}
                       </span>
                     </a>
 
                     <a
-                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
+                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать 5 Л молока фермы Oba в Аланье." : language === "en" ? "Hello, I would like to order Oba Farm 5 LT Jersey milk." : "Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group"
@@ -235,11 +235,11 @@ export default function HomePage() {
                         </div>
                         <div>
                           <span className="text-xs font-extrabold text-white block group-hover:text-amber-400 transition">Oba Yayla Mandırası</span>
-                          <span className="text-[10px] text-gray-400">Alanya Oba • Jersey Sütü</span>
+                          <span className="text-[10px] text-gray-400">{language === "ru" ? "Аланья Оба • Молоко Джерси" : language === "en" ? "Alanya Oba • Jersey Milk" : "Alanya Oba • Jersey Sütü"}</span>
                         </div>
                       </div>
                       <span className="text-[11px] font-black text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-lg">
-                        Sipariş Yaz →
+                        {language === "ru" ? "Заказ →" : language === "en" ? "Order →" : "Sipariş Yaz →"}
                       </span>
                     </a>
                   </div>
@@ -265,18 +265,18 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
                   🥛
                 </div>
-                <h3 className="font-black text-base text-gray-950 mb-1.5">Günlük Taze Sağım</h3>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">{t.badges.fresh.title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Sabah erken saatlerde sağılan Jersey inek sütleri bekletilmeden soğuk tanklara alınır.
+                  {language === "ru" ? "Свежее утреннее молоко охлаждается сразу после дойки без ожидания." : language === "en" ? "Fresh morning Jersey milk is chilled immediately after milking." : "Sabah erken saatlerde sağılan Jersey inek sütleri bekletilmeden soğuk tanklara alınır."}
                 </p>
               </div>
               <a 
-                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
+                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу узнать подробнее о парном молоке." : language === "en" ? "Hello, I would like to get information about fresh milk." : "Merhaba, günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
               >
-                <span>Bilgi Al</span>
+                <span>{language === "ru" ? "Узнать подробнее" : language === "en" ? "Learn More" : "Bilgi Al"}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -287,16 +287,16 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
                   🛡️
                 </div>
-                <h3 className="font-black text-base text-gray-950 mb-1.5">Doğrulanmış 2 Çiftlik</h3>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">{t.badges.verified.title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Toroslar Doğal Çiftliği ve Oba Yayla Mandırası garantisiyle güvenilir yerel üretim.
+                  {language === "ru" ? "Надежное местное производство от ферм Toroslar и Oba." : language === "en" ? "Reliable local dairy from Toroslar Farm and Oba Dairy." : "Toroslar Doğal Çiftliği ve Oba Yayla Mandırası garantisiyle güvenilir yerel üretim."}
                 </p>
               </div>
               <a 
                 href="#ciftlikler" 
                 className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
               >
-                <span>Çiftlikleri İncele</span>
+                <span>{t.hero.seeAllFarms}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -307,16 +307,16 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
                   ❄️
                 </div>
-                <h3 className="font-black text-base text-gray-950 mb-1.5">Soğuk Zincir +4°C</h3>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">+4°C {t.badges.coldChain.title}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Özel soğutmalı araçlarımızla sütünüz bozulmadan, tazeliğini koruyarak kapınıza gelir.
+                  {language === "ru" ? "Доставка специальным транспортом с сохранением холода +4°C." : language === "en" ? "Special refrigerated delivery keeping +4°C cold chain fresh." : "Özel soğutmalı araçlarımızla sütünüz bozulmadan, tazeliğini koruyarak kapınıza gelir."}
                 </p>
               </div>
               <a 
                 href="#bolgeler" 
                 className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
               >
-                <span>Dağıtım Saatleri</span>
+                <span>{language === "ru" ? "Зоны доставки" : language === "en" ? "Delivery Zones" : "Dağıtım Saatleri"}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -327,18 +327,18 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
                   🚚
                 </div>
-                <h3 className="font-black text-base text-gray-950 mb-1.5">Kapıda Kolay Ödeme</h3>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">{language === "ru" ? "Оплата при получении" : language === "en" ? "Easy Doorstep Payment" : "Kapıda Kolay Ödeme"}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">
-                  Alanya geneli kapınıza teslim edilir. Ödemenizi kapıda nakit veya IBAN ile tamamlayın.
+                  {language === "ru" ? "Бесплатная доставка по всей Аланье. Оплата наличными или картой." : language === "en" ? "Free delivery across Alanya. Pay cash or bank transfer at the door." : "Alanya geneli kapınıza teslim edilir. Ödemenizi kapıda nakit veya IBAN ile tamamlayın."}
                 </p>
               </div>
               <a 
-                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, kapıda teslimat için sipariş vermek istiyorum.")}`}
+                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу сделать заказ с доставкой до двери." : language === "en" ? "Hello, I would like to place an order for doorstep delivery." : "Merhaba, kapıda teslimat için sipariş vermek istiyorum.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
               >
-                <span>Sipariş Hattı</span>
+                <span>{t.table.order}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -354,13 +354,13 @@ export default function HomePage() {
           
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
             <span className="text-xs font-black text-amber-600 uppercase tracking-widest block mb-1.5">
-              PORTFÖYÜMÜZ & ÜRETİCİLER
+              {t.farmsSection.tag}
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-gray-950 tracking-tight">
-              Anlaşmalı 2 Yerel Çiftliğimiz
+              {t.farmsSection.title}
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-gray-600">
-              Günübirlik sağılan 5 LT Jersey sütlerini doğrudan sipariş hattımızdan talep edin.
+              {t.farmsSection.desc}
             </p>
           </div>
 
@@ -378,7 +378,7 @@ export default function HomePage() {
                   />
                   <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-xs text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>Doğrulanmış Üretici</span>
+                    <span>{t.badges.verified.title}</span>
                   </div>
 
                   <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur-xs text-rose-500 w-9 h-9 rounded-full flex items-center justify-center shadow-xs">
@@ -390,7 +390,7 @@ export default function HomePage() {
                       <MapPin className="w-3.5 h-3.5 text-amber-400" />
                       <span>Alanya Oba</span>
                     </div>
-                    <span className="text-amber-400 font-black">★ 4.9 (128 yorum)</span>
+                    <span className="text-amber-400 font-black">{language === "ru" ? "★ 4.9 (128 отзывов)" : language === "en" ? "★ 4.9 (128 reviews)" : "★ 4.9 (128 yorum)"}</span>
                   </div>
                 </div>
 
@@ -399,31 +399,31 @@ export default function HomePage() {
                     Toroslar Doğal Çiftliği
                   </h3>
                   <p className="text-xs text-gray-500 mt-1 font-medium">
-                    Aile İşletmesi • 12 Yıllık Deneyim
+                    {t.table.familyBiz}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mt-4">
-                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">Jersey İnek Sütü</span>
-                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT Taze Dolum</span>
-                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">Günlük Sağım</span>
+                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">{language === "ru" ? "Молоко Джерси" : language === "en" ? "Jersey Cow Milk" : "Jersey İnek Sütü"}</span>
+                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT</span>
+                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">{language === "ru" ? "Утренний удой" : language === "en" ? "Daily Milking" : "Günlük Sağım"}</span>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-                    <span className="font-semibold">Teslimat: Aynı Gün Kapıda</span>
-                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C Soğuk Zincir</span>
+                    <span className="font-semibold">{t.farmsSection.sameDayDelivery}</span>
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C {t.badges.coldChain.title}</span>
                   </div>
                 </div>
               </div>
 
               <div className="p-5 sm:p-7 pt-0">
                 <a
-                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü için güncel fiyat bilgisi almak ve sipariş vermek istiyorum.")}`}
+                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать 5 Л молока фермы Toroslar." : language === "en" ? "Hello, I would like to order Toroslar Farm 5 LT Jersey milk." : "Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü için bilgi almak ve sipariş vermek istiyorum.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition active:scale-95 cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950" />
-                  <span>WhatsApp'tan Sipariş Ver →</span>
+                  <span>{t.farmsSection.orderWithPrice} →</span>
                 </a>
               </div>
             </div>
@@ -440,7 +440,7 @@ export default function HomePage() {
                   />
                   <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-xs text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                    <span>Doğal Üretim</span>
+                    <span>{t.badges.natural.title}</span>
                   </div>
 
                   <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur-xs text-rose-500 w-9 h-9 rounded-full flex items-center justify-center shadow-xs">
@@ -452,7 +452,7 @@ export default function HomePage() {
                       <MapPin className="w-3.5 h-3.5 text-amber-400" />
                       <span>Alanya Oba</span>
                     </div>
-                    <span className="text-amber-400 font-black">★ 4.8 (95 yorum)</span>
+                    <span className="text-amber-400 font-black">{language === "ru" ? "★ 4.8 (95 отзывов)" : language === "en" ? "★ 4.8 (95 reviews)" : "★ 4.8 (95 yorum)"}</span>
                   </div>
                 </div>
 
@@ -461,31 +461,31 @@ export default function HomePage() {
                     Oba Yayla Mandırası
                   </h3>
                   <p className="text-xs text-gray-500 mt-1 font-medium">
-                    Yöresel Üretim • Katkısız
+                    {t.table.localProd}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mt-4">
-                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">Jersey İnek Sütü</span>
-                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT Taze Dolum</span>
-                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">Katkısız Çiğ Süt</span>
+                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">{language === "ru" ? "Молоко Джерси" : language === "en" ? "Jersey Cow Milk" : "Jersey İnek Sütü"}</span>
+                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT</span>
+                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">{language === "ru" ? "Без добавок" : language === "en" ? "Additive-free" : "Katkısız Çiğ Süt"}</span>
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-                    <span className="font-semibold">Teslimat: Aynı Gün Kapıda</span>
-                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C Soğuk Zincir</span>
+                    <span className="font-semibold">{t.farmsSection.sameDayDelivery}</span>
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C {t.badges.coldChain.title}</span>
                   </div>
                 </div>
               </div>
 
               <div className="p-5 sm:p-7 pt-0">
                 <a
-                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü için güncel fiyat bilgisi almak ve sipariş vermek istiyorum.")}`}
+                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я хочу заказать 5 Л молока фермы Oba." : language === "en" ? "Hello, I would like to order Oba Farm 5 LT Jersey milk." : "Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü için bilgi almak ve sipariş vermek istiyorum.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition active:scale-95 cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950" />
-                  <span>WhatsApp'tan Sipariş Ver →</span>
+                  <span>{t.farmsSection.orderWithPrice} →</span>
                 </a>
               </div>
             </div>
@@ -496,22 +496,22 @@ export default function HomePage() {
           <div className="mt-12 sm:mt-16 p-6 sm:p-10 bg-gradient-to-r from-[#091812] to-[#040e0b] border border-emerald-900/40 rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-1.5 text-center sm:text-left">
               <span className="inline-block px-3 py-1 rounded-full bg-amber-400 text-gray-950 text-xs font-black">
-                Yeni Çiftlik Katılımı
+                {language === "ru" ? "Партнерство" : language === "en" ? "New Farm Partnership" : "Yeni Çiftlik Katılımı"}
               </span>
               <h3 className="text-lg sm:text-2xl font-black">
-                Siz de Alanya'da Süt Üreticisi misiniz?
+                {t.farmsSection.producerCallTitle}
               </h3>
               <p className="text-gray-300 text-xs sm:text-sm max-w-lg">
-                Çiftliğinizi platformumuza ekleyerek doğrudan Alanya'daki binlerce aileye ulaşın.
+                {t.farmsSection.producerCallDesc}
               </p>
             </div>
             <a
-              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, ben Alanya'da süt üreticisiyim. Çiftliğimi platforma eklemek istiyorum.")}`}
+              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent(language === "ru" ? "Здравствуйте, я производитель молока в Аланье. Хочу подключиться к платформе." : language === "en" ? "Hello, I am a dairy producer in Alanya. I would like to join the platform." : "Merhaba, ben Alanya'da süt üreticisiyim. Çiftliğimi platforma eklemek istiyorum.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto text-center px-7 py-3.5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-gray-950 font-black text-sm shrink-0 shadow-lg shadow-amber-500/20 transition active:scale-95 whitespace-nowrap cursor-pointer"
             >
-              Çiftliğinizi Ekleyin →
+              {t.farmsSection.producerCallBtn} →
             </a>
           </div>
 
@@ -577,20 +577,20 @@ export default function HomePage() {
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 uppercase tracking-wider mb-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
-                <span>Alanya Süt Rehberi & Blog</span>
+                <span>{language === "ru" ? "Блог и полезные статьи" : language === "en" ? "Alanya Dairy Guide & Blog" : "Alanya Süt Rehberi & Blog"}</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-black text-gray-950 tracking-tight">
-                Faydalı Bilgiler & Çiftlik Yazıları
+                {language === "ru" ? "Полезные советы и статьи с ферм" : language === "en" ? "Useful Tips & Farm Articles" : "Faydalı Bilgiler & Çiftlik Yazıları"}
               </h2>
               <p className="mt-1.5 text-xs sm:text-sm text-gray-600">
-                Jersey sütünün sırları, çiğ süt kaynatma ve ev yoğurdu mayalama rehberleri.
+                {language === "ru" ? "Секреты молока Джерси, правильное кипячение и рецепты домашнего йогурта." : language === "en" ? "Secrets of Jersey milk, proper boiling tips, and homemade yogurt recipes." : "Jersey sütünün sırları, çiğ süt kaynatma ve ev yoğurdu mayalama rehberleri."}
               </p>
             </div>
             <Link
               href="/blog"
               className="mt-3 sm:mt-0 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition"
             >
-              <span>Tüm Yazıları Gör ({BLOG_POSTS.length})</span>
+              <span>{language === "ru" ? "Все статьи" : language === "en" ? "View All Articles" : "Tüm Yazıları Gör"} ({BLOG_POSTS.length})</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -636,7 +636,7 @@ export default function HomePage() {
                     href={`/blog/${post.slug}`}
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 group-hover:underline"
                   >
-                    <span>Devamını Oku</span>
+                    <span>{language === "ru" ? "Читать далее" : language === "en" ? "Read More" : "Devamını Oku"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
