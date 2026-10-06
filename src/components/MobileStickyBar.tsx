@@ -26,13 +26,15 @@ export default function MobileStickyBar({ onOpenOrderModal }: MobileStickyBarPro
         </a>
 
         {/* WhatsApp Hızlı Sipariş Butonu */}
-        <button
-          onClick={onOpenOrderModal}
-          className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-emerald-700/30 transition-transform active:scale-[0.98] whitespace-nowrap"
+        <a
+          href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-[#F59E0B] active:bg-[#D97706] text-gray-950 font-black text-xs rounded-xl shadow-lg shadow-amber-500/25 transition-transform active:scale-[0.98] whitespace-nowrap"
         >
-          <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+          <MessageCircle className="w-4 h-4 fill-gray-950 text-gray-950 shrink-0" />
           <span>{t.stickyBar.order}</span>
-        </button>
+        </a>
 
       </div>
     </div>

@@ -114,9 +114,8 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         const prod = PRODUCTS.find((p) => p.id === item.productId);
         const milkName = language === "ru" ? "5 Л Молоко Джерси" : language === "en" ? "5 LT Jersey Milk" : "5 LT Jersey İnek Sütü";
         const farmLabel = language === "ru" ? "Ферма" : language === "en" ? "Farm" : "Çiftlik";
-        const priceLabel = language === "ru" ? "Сумма" : language === "en" ? "Amount" : "Tutar";
         const pieceLabel = language === "ru" ? "шт." : language === "en" ? "pcs" : "Adet";
-        return `• ${item.quantity} ${pieceLabel} ${milkName}\n   ↳ ${farmLabel}: ${prod?.vendorName}\n   ↳ ${priceLabel}: ${item.price * item.quantity} TL`;
+        return `• ${item.quantity} ${pieceLabel} ${milkName}\n   ↳ ${farmLabel}: ${prod?.vendorName}`;
       })
       .join("\n\n");
 
@@ -128,9 +127,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         `*Адрес доставки:* ${customerAddress.trim()}\n` +
         (customerNote.trim() ? `*Примечание:* ${customerNote.trim()}\n` : "") +
         `\n🛒 *ВЫБРАННЫЕ ФЕРМЫ И МОЛОКО:*\n${itemsSummary}\n\n` +
-        `💰 *ИТОГО К ОПЛАТЕ:* ${totalPrice} TL\n` +
-        `📦 *Оплата:* Наличными курьеру / Перевод на карту\n\n` +
-        `_Подтвердите, пожалуйста, заказ и примерное время доставки._`;
+        `_Подтвердите, пожалуйста, актуальную цену и ориентировочное время доставки._`;
     } else if (language === "en") {
       message = `🥛 *${t.orderModal.whatsappOrderTitle}* 🥛\n\n` +
         `*Customer Name:* ${customerName.trim() || "Not specified"}\n` +
@@ -138,9 +135,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         `*Delivery Address:* ${customerAddress.trim()}\n` +
         (customerNote.trim() ? `*Order Note:* ${customerNote.trim()}\n` : "") +
         `\n🛒 *SELECTED FARMS & PRODUCTS:*\n${itemsSummary}\n\n` +
-        `💰 *TOTAL AMOUNT:* ${totalPrice} TL\n` +
-        `📦 *Payment Method:* Cash on Delivery / Bank Transfer\n\n` +
-        `_Please confirm my order and share estimated delivery time._`;
+        `_Please confirm current price and estimated delivery time._`;
     } else {
       message = `🥛 *${t.orderModal.whatsappOrderTitle}* 🥛\n\n` +
         `*Müşteri Adı:* ${customerName.trim() || "Belirtilmedi"}\n` +
@@ -148,9 +143,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         `*Teslimat Adresi:* ${customerAddress.trim()}\n` +
         (customerNote.trim() ? `*Sipariş Notu:* ${customerNote.trim()}\n` : "") +
         `\n🛒 *SEÇİLEN ÇİFTLİK VE SÜTLER:*\n${itemsSummary}\n\n` +
-        `💰 *GENEL TOPLAM:* ${totalPrice} TL\n` +
-        `📦 *Ödeme Türü:* Kapıda Nakit / IBAN Havale\n\n` +
-        `_Lütfen siparişimi onaylayıp teslimat saatini paylaşır mısınız?_`;
+        `_Lütfen güncel fiyatı ve teslimat saatini paylaşır mısınız?_`;
     }
 
     const encodedMessage = encodeURIComponent(message);
@@ -167,9 +160,9 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         onClick={(e) => e.stopPropagation()}
       >
         {/* Başlık Barı */}
-        <div className="bg-emerald-900 text-white px-5 py-4 flex items-center justify-between">
+        <div className="bg-[#0b1b16] text-white px-5 py-4 flex items-center justify-between border-b border-emerald-900/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
               <ShoppingBag className="w-5 h-5 text-amber-300" />
             </div>
             <div>
@@ -216,14 +209,14 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
                         </p>
                       </div>
 
-                      <span className="text-base font-black text-emerald-900 whitespace-nowrap">
-                        {item.price * item.quantity} TL
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                        Günlük Taze
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-emerald-100">
                       <span className="text-xs text-gray-600 font-semibold">
-                        {t.orderModal.unitPrice}: {item.price} TL
+                        Adet / Miktar
                       </span>
 
                       <div className="flex items-center gap-2">
@@ -270,7 +263,7 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
                     <span className="text-xs text-gray-500">{prod.vendorLocation} • 5 LT Jersey Süt</span>
                   </div>
                   <span className="text-xs font-black text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-lg">
-                    {prod.options[0].price} TL +
+                    + Ekle
                   </span>
                 </button>
               ))}
@@ -344,19 +337,19 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
 
         </div>
 
-        {/* Alt Toplam & Buton */}
+        {/* Alt Sipariş Onay & Buton */}
         <div className="p-4 bg-emerald-50/50 border-t border-emerald-100 flex flex-col gap-2.5">
           <div className="flex items-center justify-between px-1">
-            <span className="text-sm font-medium text-gray-600">{t.orderModal.totalAmount}</span>
-            <span className="text-2xl font-black text-emerald-950">{totalPrice} TL</span>
+            <span className="text-xs font-bold text-gray-700">Hızlı WhatsApp Doğrulama:</span>
+            <span className="text-xs font-black text-emerald-800 bg-emerald-100/90 px-2.5 py-1 rounded-full">Ücretsiz Kapıda Teslimat</span>
           </div>
 
           <button
             type="submit"
             form="order-form"
-            className="w-full py-3.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-black text-base flex items-center justify-center gap-2 shadow-lg shadow-emerald-700/25 transition-all"
+            className="w-full py-3.5 px-4 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 text-gray-950" />
             <span>{t.orderModal.sendWhatsappBtn}</span>
           </button>
 

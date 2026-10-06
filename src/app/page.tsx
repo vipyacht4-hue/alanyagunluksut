@@ -11,13 +11,7 @@ import {
   CheckCircle2, 
   ArrowRight, 
   MapPin, 
-  Zap, 
-  Tag, 
-  Store, 
-  Users, 
   Heart, 
-  Snowflake, 
-  Leaf, 
   BookOpen,
   Star
 } from "lucide-react";
@@ -34,7 +28,7 @@ import { BLOG_POSTS } from "@/data/blogPosts";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function HomePage() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | undefined>();
 
@@ -44,7 +38,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9FBFA] text-gray-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-20 md:pb-0 overflow-x-hidden w-full">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-gray-900 font-sans selection:bg-amber-100 selection:text-amber-950 pb-20 md:pb-0 overflow-x-hidden w-full">
       
       {/* Üst Menü */}
       <Navbar onOpenOrderModal={() => handleOpenOrder()} />
@@ -52,369 +46,183 @@ export default function HomePage() {
       <main className="flex-1">
         
         {/* ========================================================= */}
-        {/* HERO BÖLÜMÜ - MOBİL ÖNCELİKLİ (MOBILE FIRST) DİZAYN       */}
+        {/* HERO BÖLÜMÜ - SCREENSHOT STİLİ MODERN FLOATING DARK CONTAINER */}
         {/* ========================================================= */}
-        <section className="relative overflow-hidden pt-3 pb-6 sm:pt-8 sm:pb-16 bg-gradient-to-b from-[#F2F8F5] via-white to-[#F7FAF8]">
-          
-          <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-12 items-center">
+        <section className="pt-3 sm:pt-6 pb-6 sm:pb-12 max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="relative rounded-[28px] sm:rounded-[44px] bg-[#0A1612] border border-emerald-800/30 shadow-[0_25px_80px_rgba(4,20,14,0.45)] overflow-hidden p-6 sm:p-10 lg:p-14 text-white">
+            
+            {/* Arka plan radyal ışık efekti */}
+            <div className="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
               
               {/* SOL SÜTUN */}
-              <div className="lg:col-span-7 space-y-3 sm:space-y-6">
+              <div className="lg:col-span-7 space-y-4 sm:space-y-6">
                 
-                {/* Rozet */}
-                <div>
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10.5px] sm:text-xs font-bold shadow-2xs">
-                    <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 fill-emerald-600 shrink-0" />
-                    <span>{t.hero.verifiedBadge}</span>
+                {/* Üst Rozet Barı */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-black shadow-xs">
+                    <span className="text-sm">🏆</span>
+                    <span>Alanya'nın Doğrulanmış Yerel Çiftlikleri</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Alanya Geneli Ücretsiz Kapıda Teslimat</span>
                   </div>
                 </div>
 
-                {/* Büyük Başlık - Mobilde Ekrana Kusursuz Sığan Ölçekleme */}
-                <h1 className="text-[21px] xs:text-2xl sm:text-4xl xl:text-[46px] 2xl:text-[50px] font-black text-gray-950 tracking-tight leading-[1.2] sm:leading-[1.25]">
-                  <span className="block">{t.hero.titleLine1}</span>
-                  <span className="block mt-0.5 sm:mt-1">{t.hero.titleLine2}</span>
-                  <span className="block mt-0.5 sm:mt-1 text-[#D97706]">
-                    {t.hero.titleLine3}
+                {/* Büyük Başlık */}
+                <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[54px] font-black text-white tracking-tight leading-[1.15] sm:leading-[1.18]">
+                  <span>Tüm Doğal Süt</span>
+                  <span className="block mt-1 sm:mt-1.5">İhtiyacınız</span>
+                  <span className="block mt-1 sm:mt-1.5 text-[#F59E0B]">
+                    Tek Platformda
                   </span>
-                  <span className="block mt-0.5 sm:mt-1">{t.hero.titleLine4}</span>
                 </h1>
 
                 {/* Açıklama */}
-                <p className="text-[11.5px] sm:text-base text-gray-600 max-w-xl leading-snug sm:leading-relaxed">
-                  {t.hero.desc}
+                <p className="text-xs sm:text-base text-gray-300 max-w-xl leading-relaxed">
+                  Alanya'daki yerel üreticilerin günlük Jersey inek sütleri, soğuk zincirle el değmeden doğrudan kapınıza teslim. Günlük taze sağım, %100 katkısız. Güncel fiyat ve hızlı teslimat için doğrudan sipariş hattımıza ulaşın.
                 </p>
 
-                {/* 3 Özellik İkonu - Mobilde Kompakt */}
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-3 pt-0.5 sm:pt-1">
-                  
-                  {/* Anında Sipariş */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-amber-100/90 flex items-center justify-center text-amber-600 shrink-0">
-                      <Zap className="w-3 h-3 sm:w-4 sm:h-4 fill-amber-500 text-amber-500" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.instantOrderTitle}</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.instantOrderDesc}</p>
-                    </div>
-                  </div>
+                {/* Aksiyon Butonları */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                  <a
+                    href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base shadow-xl shadow-amber-500/20 active:scale-95 transition cursor-pointer"
+                  >
+                    <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950 shrink-0" />
+                    <span>WhatsApp Sipariş Hattı →</span>
+                  </a>
 
-                  {/* Şeffaf Fiyatlar */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
-                      <Tag className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.transparentPriceTitle}</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.transparentPriceDesc}</p>
-                    </div>
-                  </div>
-
-                  {/* Soğuk Zincir Teslimat */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-xl bg-white border border-gray-100 shadow-2xs">
-                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-emerald-100/90 flex items-center justify-center text-emerald-700 shrink-0">
-                      <Truck className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-700" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] sm:text-xs font-black text-gray-900 leading-tight">{t.hero.coldChainTitle}</h4>
-                      <p className="hidden sm:block text-[11px] text-gray-500 leading-tight">{t.hero.coldChainDesc}</p>
-                    </div>
-                  </div>
-
+                  <a
+                    href={`tel:${CONTACT_INFO.phone}`}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/15 active:bg-white/20 text-white font-bold text-sm sm:text-base border border-white/20 transition"
+                  >
+                    <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>0533 252 66 20 Ara</span>
+                  </a>
                 </div>
 
-                {/* ========================================================= */}
-                {/* 2 FİRMANIN KARŞILAŞTIRMASI                                 */}
-                {/* ========================================================= */}
+                {/* Alt Güven Onay Maddeleri */}
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-2 text-xs sm:text-sm text-gray-400 font-medium">
+                  <div className="flex items-center gap-1.5 text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Günlük Taze Sağım</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>+4°C Soğuk Zincir</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-gray-300">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Kapıda Kolay Ödeme</span>
+                  </div>
+                </div>
+
+              </div>
+
+
+              {/* SAĞ SÜTUN (Modern UI Mockup Kompozisyonu) */}
+              <div className="lg:col-span-5 relative flex flex-col items-center">
                 
-                {/* MOBİL ÖZEL KART GÖRÜNÜMÜ */}
-                <div className="block sm:hidden space-y-2.5 pt-1">
-                  <div className="flex items-center justify-between px-1">
-                    <div className="flex items-center gap-1.5">
-                      <Store className="w-3.5 h-3.5 text-emerald-700" />
-                      <span className="text-xs font-black text-gray-900">{t.hero.compareTitle}</span>
+                <div className="w-full max-w-[460px] bg-gradient-to-b from-[#10241D] to-[#0A1713] rounded-3xl border border-emerald-800/40 p-4 sm:p-5 shadow-2xl space-y-3.5">
+                  
+                  {/* Üst 2'li Mini Kart */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
+                      <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold mb-1">
+                        <span>🥛</span>
+                        <span>Bugünkü Sağım</span>
+                      </div>
+                      <div className="text-lg font-black text-white">5 LT Jersey</div>
+                      <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">Aynı Gün Teslimat</span>
                     </div>
-                    <span className="text-[10px] text-emerald-700 font-bold">{t.hero.activeProducers}</span>
+
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
+                      <div className="flex items-center gap-1.5 text-amber-400 text-xs font-bold mb-1">
+                        <span>🌿</span>
+                        <span>Doğallık Oranı</span>
+                      </div>
+                      <div className="text-lg font-black text-emerald-400">%100 Saf</div>
+                      <span className="text-[10px] text-gray-400 block mt-0.5">Katkısız Çiğ Süt</span>
+                    </div>
                   </div>
 
-                  {/* 1. Toroslar Çiftliği Mobil Kart */}
-                  <div className="p-3 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                  {/* Görsel Çerçevesi (Telefon Görseli) */}
+                  <div 
+                    onClick={() => {
+                      window.open(`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Alanya Günlük Süt sipariş hattından ulaşıyorum. Günlük Jersey sütü siparişi vermek istiyorum.")}`, "_blank");
+                    }}
+                    className="relative rounded-2xl overflow-hidden border border-white/15 bg-black cursor-pointer group shadow-lg"
+                  >
+                    <Image
+                      src="/telefon.png"
+                      alt="Alanya Günlük Süt Mobil Sipariş Hattı"
+                      width={1122}
+                      height={1402}
+                      priority
+                      className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3.5 sm:p-4">
+                      <div className="w-full flex items-center justify-between text-white">
+                        <div>
+                          <span className="text-[11px] font-bold text-amber-400 block">Alanya Süt Hattı</span>
+                          <span className="text-xs font-black">Toroslar & Oba Çiftlikleri</span>
+                        </div>
+                        <span className="text-xs font-black bg-[#F59E0B] text-gray-950 px-3 py-1.5 rounded-xl shadow-md">
+                          Sipariş Ver →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2 Çiftlik Seçim Önizlemesi */}
+                  <div className="space-y-2 pt-1">
+                    <a
+                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-gray-800 shrink-0">
                           <Image src="/toroslar.jpg" alt="Toroslar Doğal Çiftliği" fill className="object-cover" />
                         </div>
                         <div>
-                          <div className="flex items-center gap-1">
-                            <h4 className="text-xs font-black text-gray-950">Toroslar Doğal Çiftliği</h4>
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
-                          </div>
-                          <span className="text-[10px] text-gray-500 block leading-tight">{t.table.familyBiz}</span>
-                          <span className="text-[10px] text-amber-500 font-bold">★ 4.9 (128)</span>
+                          <span className="text-xs font-extrabold text-white block group-hover:text-amber-400 transition">Toroslar Doğal Çiftliği</span>
+                          <span className="text-[10px] text-gray-400">Alanya Oba • Jersey Sütü</span>
                         </div>
                       </div>
+                      <span className="text-[11px] font-black text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-lg">
+                        Sipariş Yaz →
+                      </span>
+                    </a>
 
-                      <div className="text-right shrink-0">
-                        <span className="text-[10px] text-gray-400 block font-bold">5 LT</span>
-                        <span className="text-lg font-black text-emerald-800">700 TL</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleOpenOrder("toroslar-jersey-5lt")}
-                      className="w-full py-2 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs"
+                    <a
+                      href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü siparişi vermek istiyorum.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition group"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                      <span>{t.table.orderBtn} (700 TL)</span>
-                    </button>
-                  </div>
-
-                  {/* 2. Oba Mandırası Mobil Kart */}
-                  <div className="p-3 rounded-2xl bg-white border border-gray-200 shadow-xs space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                      <div className="flex items-center gap-2.5">
+                        <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-gray-800 shrink-0">
                           <Image src="/oba.jpg" alt="Oba Yayla Mandırası" fill className="object-cover" />
                         </div>
                         <div>
-                          <div className="flex items-center gap-1">
-                            <h4 className="text-xs font-black text-gray-950">Oba Yayla Mandırası</h4>
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
-                          </div>
-                          <span className="text-[10px] text-gray-500 block leading-tight">{t.table.localProd}</span>
-                          <span className="text-[10px] text-amber-500 font-bold">★ 4.8 (95)</span>
+                          <span className="text-xs font-extrabold text-white block group-hover:text-amber-400 transition">Oba Yayla Mandırası</span>
+                          <span className="text-[10px] text-gray-400">Alanya Oba • Jersey Sütü</span>
                         </div>
                       </div>
-
-                      <div className="text-right shrink-0">
-                        <span className="text-[10px] text-gray-400 block font-bold">5 LT</span>
-                        <span className="text-lg font-black text-emerald-800">625 TL</span>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => handleOpenOrder("oba-jersey-5lt")}
-                      className="w-full py-2 bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-xs"
-                    >
-                      <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                      <span>{t.table.orderBtn} (625 TL)</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* MASAÜSTÜ & TABLET TABLO GÖRÜNÜMÜ */}
-                <div className="hidden sm:block bg-white rounded-3xl border border-gray-200/90 shadow-sm overflow-hidden">
-                  
-                  {/* Kart Başlığı */}
-                  <div className="px-5 py-3.5 bg-gray-50/80 border-b border-gray-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Store className="w-4 h-4 text-emerald-700" />
-                      <h3 className="text-xs sm:text-sm font-extrabold text-gray-900">
-                        {t.hero.compareTitle}
-                      </h3>
-                    </div>
-                    <a
-                      href="#ciftlikler"
-                      className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-0.5 transition"
-                    >
-                      <span>{t.hero.seeAllFarms}</span>
-                      <ArrowRight className="w-3 h-3" />
+                      <span className="text-[11px] font-black text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2 py-1 rounded-lg">
+                        Sipariş Yaz →
+                      </span>
                     </a>
                   </div>
 
-                  {/* Tablo Gövdesi */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs">
-                      <thead>
-                        <tr className="border-b border-gray-100 text-[10px] uppercase font-bold text-gray-400 bg-gray-50/40">
-                          <th className="py-2.5 px-4">{t.table.farmProducer}</th>
-                          <th className="py-2.5 px-3">{t.table.origin}</th>
-                          <th className="py-2.5 px-3">{t.table.milkType}</th>
-                          <th className="py-2.5 px-3">{t.table.price5Lt}</th>
-                          <th className="py-2.5 px-3">{t.table.rating}</th>
-                          <th className="py-2.5 px-4 text-right">{t.table.order}</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100 font-medium">
-                        
-                        {/* 1. Toroslar Doğal Çiftliği - 700 TL */}
-                        <tr className="hover:bg-emerald-50/30 transition-colors">
-                          <td className="py-3.5 px-4">
-                            <div className="flex items-center gap-3">
-                              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 bg-gray-100 border border-gray-200">
-                                <Image
-                                  src="/toroslar.jpg"
-                                  alt="Toroslar Doğal Çiftliği"
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-1">
-                                  <span className="font-extrabold text-gray-950 text-xs sm:text-sm">
-                                    Toroslar Doğal Çiftliği
-                                  </span>
-                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
-                                </div>
-                                <span className="text-[11px] text-gray-500 block leading-tight">
-                                  {t.table.familyBiz}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <div className="flex items-center gap-1 text-gray-600 text-xs">
-                              <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                              <span>Alanya Oba</span>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-3 text-gray-700 whitespace-nowrap text-xs">
-                            Jersey İnek Sütü
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <span className="font-black text-emerald-800 text-sm sm:text-base">
-                              700 TL
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <div className="flex items-center gap-1 text-xs">
-                              <span className="text-amber-500 font-bold flex items-center">
-                                ★ 4.9
-                              </span>
-                              <span className="text-gray-400 text-[10px]">(128)</span>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                            <button
-                              onClick={() => handleOpenOrder("toroslar-jersey-5lt")}
-                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs transition shadow-xs"
-                            >
-                              <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                              <span>{t.table.orderBtn}</span>
-                            </button>
-                          </td>
-                        </tr>
-
-                        {/* 2. Oba Yayla Mandırası - 625 TL */}
-                        <tr className="hover:bg-emerald-50/30 transition-colors">
-                          <td className="py-3.5 px-4">
-                            <div className="flex items-center gap-3">
-                              <div className="relative w-11 h-11 rounded-xl overflow-hidden shrink-0 bg-gray-100 border border-gray-200">
-                                <Image
-                                  src="/oba.jpg"
-                                  alt="Oba Yayla Mandırası"
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-1">
-                                  <span className="font-extrabold text-gray-950 text-xs sm:text-sm">
-                                    Oba Yayla Mandırası
-                                  </span>
-                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600 text-white" />
-                                </div>
-                                <span className="text-[11px] text-gray-500 block leading-tight">
-                                  {t.table.localProd}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <div className="flex items-center gap-1 text-gray-600 text-xs">
-                              <MapPin className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                              <span>Alanya Oba</span>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-3 text-gray-700 whitespace-nowrap text-xs">
-                            Jersey İnek Sütü
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <span className="font-black text-emerald-800 text-sm sm:text-base">
-                              625 TL
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-3 whitespace-nowrap">
-                            <div className="flex items-center gap-1 text-xs">
-                              <span className="text-amber-500 font-bold flex items-center">
-                                ★ 4.8
-                              </span>
-                              <span className="text-gray-400 text-[10px]">(95)</span>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                            <button
-                              onClick={() => handleOpenOrder("oba-jersey-5lt")}
-                              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white font-bold text-xs transition shadow-xs"
-                            >
-                              <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                              <span>{t.table.orderBtn}</span>
-                            </button>
-                          </td>
-                        </tr>
-
-                      </tbody>
-                    </table>
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              {/* SAĞ SÜTUN (Mobilde ve Masaüstünde Mükemmel Orantılı Görsel) */}
-              <div className="lg:col-span-5 relative flex flex-col items-center mt-1 lg:mt-0">
-                
-                {/* Orijinal Yüksek Çözünürlüklü Telefon Renderı - Mobilde Ekrana Sığacak Şekilde Ölçekli */}
-                <div 
-                  className="relative w-full max-w-[270px] xs:max-w-[310px] sm:max-w-[420px] lg:max-w-[480px] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-xl sm:shadow-2xl border border-gray-200/80 cursor-pointer group bg-white mx-auto"
-                  onClick={() => handleOpenOrder()}
-                >
-                  <Image
-                    src="/telefon.png"
-                    alt="Alanya Günlük Süt Mobil Uygulama ve Doğal Çiftlik Sütleri"
-                    width={1122}
-                    height={1402}
-                    priority
-                    className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Sosyal Kanıt Kartı */}
-                <div className="mt-2.5 sm:mt-4 w-full max-w-[270px] xs:max-w-[310px] sm:max-w-[420px] lg:max-w-[480px] bg-white rounded-2xl border border-gray-200/90 shadow-xs p-2.5 sm:p-3.5 flex items-center justify-between gap-2 sm:gap-3 mx-auto">
-                  
-                  {/* Avatarlar + Yıldızlar */}
-                  <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-                    <div className="flex -space-x-1.5 sm:-space-x-2">
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-emerald-700 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
-                        EK
-                      </div>
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-amber-500 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
-                        MY
-                      </div>
-                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white bg-sky-600 text-white text-[8px] sm:text-[10px] font-bold flex items-center justify-center">
-                        AT
-                      </div>
-                    </div>
-
-                    <div>
-                      <span className="text-[10.5px] sm:text-xs font-black text-gray-950 block leading-tight">
-                        {t.hero.socialProofCount}
-                      </span>
-                      <span className="text-[8.5px] sm:text-[10px] text-gray-500 font-medium block">
-                        {t.hero.socialProofText}
-                      </span>
-                      <div className="flex items-center text-amber-400 text-[8.5px] sm:text-[10px] mt-0.5">
-                        ★★★★★
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Alıntı */}
-                  <div className="text-[9.5px] sm:text-[11px] text-gray-600 italic border-l border-gray-100 pl-2 sm:pl-3 leading-snug">
-                    <p>{t.hero.socialProofQuote}</p>
-                  </div>
-
                 </div>
 
               </div>
@@ -425,170 +233,264 @@ export default function HomePage() {
 
 
         {/* ========================================================= */}
-        {/* 5'Lİ GÜVEN ROZETİ ÇUBUĞU (Mobilde 2 Kolon, Masaüstü 5)     */}
+        {/* 4 MODERN FLOATING ÖZELLİK KARTI (SCREENSHOT REFERANSI)    */}
         {/* ========================================================= */}
-        <section className="bg-white border-y border-gray-200/70 py-4 sm:py-6">
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3.5 sm:gap-4 items-center">
-              
-              {/* 1. %100 Taze */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
+        <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-4 pb-12 sm:pb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            
+            {/* 1. Günlük Taze Sağım */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-gray-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
+                  🥛
                 </div>
-                <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.fresh.title}</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.fresh.desc}</p>
-                </div>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">Günlük Taze Sağım</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Sabah erken saatlerde sağılan Jersey inek sütleri bekletilmeden soğuk tanklara alınır.
+                </p>
               </div>
-
-              {/* 2. Doğrulanmış Çiftlikler */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.verified.title}</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.verified.desc}</p>
-                </div>
-              </div>
-
-              {/* 3. Yerel Üreticiyi Destekle */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.local.title}</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.local.desc}</p>
-                </div>
-              </div>
-
-              {/* 4. Katkısız & Doğal */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.natural.title}</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.natural.desc}</p>
-                </div>
-              </div>
-
-              {/* 5. Soğuk Zincir Teslimat */}
-              <div className="flex items-center gap-2 sm:gap-3 col-span-2 md:col-span-1 justify-center md:justify-start">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <Snowflake className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <h4 className="text-[11px] sm:text-xs font-black text-gray-950">{t.badges.coldChain.title}</h4>
-                  <p className="text-[10px] sm:text-[11px] text-gray-500">{t.badges.coldChain.desc}</p>
-                </div>
-              </div>
-
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, günlük taze Jersey sütü hakkında bilgi ve sipariş vermek istiyorum.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
+              >
+                <span>Bilgi Al</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
+
+            {/* 2. Doğrulanmış 2 Çiftlik */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-gray-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
+                  🛡️
+                </div>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">Doğrulanmış 2 Çiftlik</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Toroslar Doğal Çiftliği ve Oba Yayla Mandırası garantisiyle güvenilir yerel üretim.
+                </p>
+              </div>
+              <a 
+                href="#ciftlikler" 
+                className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
+              >
+                <span>Çiftlikleri İncele</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+
+            {/* 3. Soğuk Zincir +4°C */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-gray-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
+                  ❄️
+                </div>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">Soğuk Zincir +4°C</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Özel soğutmalı araçlarımızla sütünüz bozulmadan, tazeliğini koruyarak kapınıza gelir.
+                </p>
+              </div>
+              <a 
+                href="#bolgeler" 
+                className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
+              >
+                <span>Dağıtım Saatleri</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+
+            {/* 4. Kapıda Kolay Ödeme */}
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-gray-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black text-xl mb-4 group-hover:scale-110 transition-transform">
+                  🚚
+                </div>
+                <h3 className="font-black text-base text-gray-950 mb-1.5">Kapıda Kolay Ödeme</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Alanya geneli kapınıza teslim edilir. Ödemenizi kapıda nakit veya IBAN ile tamamlayın.
+                </p>
+              </div>
+              <a 
+                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, kapıda teslimat için sipariş vermek istiyorum.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-emerald-800 group-hover:text-amber-600 transition"
+              >
+                <span>Sipariş Hattı</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+
           </div>
         </section>
 
 
         {/* ========================================================= */}
-        {/* ÇİFTLİKLERİMİZ (2 FİRMA DETAY KARTLARI)                   */}
+        {/* ÇİFTLİKLERİMİZ (2 FİRMA DETAY KARTLARI - FİYATSIZ DİREKT SİPARİŞ) */}
         {/* ========================================================= */}
-        <section id="ciftlikler" className="py-12 sm:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="ciftlikler" className="py-12 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-            <span className="text-xs font-extrabold text-emerald-700 uppercase tracking-widest block mb-1.5">
-              {t.farmsSection.tag}
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+            <span className="text-xs font-black text-amber-600 uppercase tracking-widest block mb-1.5">
+              PORTFÖYÜMÜZ & ÜRETİCİLER
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-950 tracking-tight">
-              {t.farmsSection.title}
+            <h2 className="text-2xl sm:text-4xl font-black text-gray-950 tracking-tight">
+              Anlaşmalı 2 Yerel Çiftliğimiz
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm text-gray-600">
-              {t.farmsSection.desc}
+            <p className="mt-2 text-xs sm:text-sm text-gray-600">
+              Günübirlik sağılan 5 LT Jersey sütlerini doğrudan sipariş hattımızdan talep edin.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {VENDORS.map((vendor) => (
-              <div
-                key={vendor.id}
-                className="bg-white rounded-3xl border border-gray-200/90 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="relative h-48 sm:h-56 w-full bg-gray-100 overflow-hidden">
-                    <Image
-                      src={vendor.image}
-                      alt={vendor.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-emerald-900 text-xs font-black px-3 py-1 rounded-full shadow-xs flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>{vendor.badge}</span>
-                    </div>
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-bold bg-black/45 backdrop-blur-xs px-3 py-1.5 rounded-xl">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                        <span>{vendor.location}</span>
-                      </div>
-                      <span className="text-amber-400 font-black">★ {vendor.rating}</span>
-                    </div>
+            
+            {/* 1. Toroslar Doğal Çiftliği */}
+            <div className="bg-white rounded-3xl border border-gray-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between group">
+              <div>
+                <div className="relative h-56 sm:h-64 w-full bg-gray-100 overflow-hidden">
+                  <Image
+                    src="/toroslar.jpg"
+                    alt="Toroslar Doğal Çiftliği"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-xs text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>Doğrulanmış Üretici</span>
                   </div>
 
-                  <div className="p-5 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-black text-gray-950 group-hover:text-emerald-700 transition">
-                      {vendor.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-1 font-medium">
-                      {vendor.subTitle}
-                    </p>
+                  <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur-xs text-rose-500 w-9 h-9 rounded-full flex items-center justify-center shadow-xs">
+                    <Heart className="w-4 h-4 fill-rose-500" />
+                  </div>
 
-                    <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-                      <div>
-                        <span className="text-[10px] text-gray-400 uppercase font-bold block">5 LT Jersey Süt</span>
-                        <span className="text-2xl sm:text-3xl font-black text-emerald-800">{vendor.price5Lt} TL</span>
-                      </div>
-                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl">
-                        {t.farmsSection.sameDayDelivery}
-                      </span>
+                  <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white text-xs font-bold bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-2xl">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Alanya Oba</span>
                     </div>
+                    <span className="text-amber-400 font-black">★ 4.9 (128 yorum)</span>
                   </div>
                 </div>
 
-                <div className="p-5 sm:p-6 pt-0">
-                  <button
-                    onClick={() => handleOpenOrder(PRODUCTS.find((p) => p.vendorId === vendor.id)?.id)}
-                    className="w-full py-3 sm:py-3.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-700/20 transition active:scale-95"
-                  >
-                    <MessageCircle className="w-4 h-4 fill-white" />
-                    <span>{t.farmsSection.orderWithPrice} ({vendor.price5Lt} TL)</span>
-                  </button>
+                <div className="p-5 sm:p-7">
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-950 group-hover:text-emerald-700 transition">
+                    Toroslar Doğal Çiftliği
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1 font-medium">
+                    Aile İşletmesi • 12 Yıllık Deneyim
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">Jersey İnek Sütü</span>
+                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT Taze Dolum</span>
+                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">Günlük Sağım</span>
+                  </div>
+
+                  <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+                    <span className="font-semibold">Teslimat: Aynı Gün Kapıda</span>
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C Soğuk Zincir</span>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              <div className="p-5 sm:p-7 pt-0">
+                <a
+                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Toroslar Doğal Çiftliği 5 LT Jersey sütü için güncel fiyat bilgisi almak ve sipariş vermek istiyorum.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition active:scale-95 cursor-pointer"
+                >
+                  <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950" />
+                  <span>WhatsApp'tan Sipariş Ver →</span>
+                </a>
+              </div>
+            </div>
+
+            {/* 2. Oba Yayla Mandırası */}
+            <div className="bg-white rounded-3xl border border-gray-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between group">
+              <div>
+                <div className="relative h-56 sm:h-64 w-full bg-gray-100 overflow-hidden">
+                  <Image
+                    src="/oba.jpg"
+                    alt="Oba Yayla Mandırası"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-xs text-emerald-900 text-xs font-black px-3.5 py-1.5 rounded-full shadow-xs flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>Doğal Üretim</span>
+                  </div>
+
+                  <div className="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur-xs text-rose-500 w-9 h-9 rounded-full flex items-center justify-center shadow-xs">
+                    <Heart className="w-4 h-4 fill-rose-500" />
+                  </div>
+
+                  <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white text-xs font-bold bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-2xl">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Alanya Oba</span>
+                    </div>
+                    <span className="text-amber-400 font-black">★ 4.8 (95 yorum)</span>
+                  </div>
+                </div>
+
+                <div className="p-5 sm:p-7">
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-950 group-hover:text-emerald-700 transition">
+                    Oba Yayla Mandırası
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1 font-medium">
+                    Yöresel Üretim • Katkısız
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <span className="text-[11px] font-bold bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded-lg">Jersey İnek Sütü</span>
+                    <span className="text-[11px] font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg">5 LT Taze Dolum</span>
+                    <span className="text-[11px] font-bold bg-amber-50 text-amber-800 px-2.5 py-1 rounded-lg">Katkısız Çiğ Süt</span>
+                  </div>
+
+                  <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+                    <span className="font-semibold">Teslimat: Aynı Gün Kapıda</span>
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg">+4°C Soğuk Zincir</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-5 sm:p-7 pt-0">
+                <a
+                  href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, Oba Yayla Mandırası 5 LT Jersey sütü için güncel fiyat bilgisi almak ve sipariş vermek istiyorum.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-4 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] active:bg-[#B45309] text-gray-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition active:scale-95 cursor-pointer"
+                >
+                  <MessageCircle className="w-5 h-5 fill-gray-950 text-gray-950" />
+                  <span>WhatsApp'tan Sipariş Ver →</span>
+                </a>
+              </div>
+            </div>
+
           </div>
 
           {/* Çiftlik Katılım Başvurusu */}
-          <div className="mt-10 sm:mt-14 p-5 sm:p-8 bg-gradient-to-r from-emerald-900 to-emerald-950 rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 shadow-xl">
-            <div className="space-y-1 text-center sm:text-left">
-              <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-400 text-emerald-950 text-[10px] sm:text-xs font-black">
-                {t.farmsSection.producerCallBtn}
+          <div className="mt-12 sm:mt-16 p-6 sm:p-10 bg-gradient-to-r from-[#091812] to-[#040e0b] border border-emerald-900/40 rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div className="space-y-1.5 text-center sm:text-left">
+              <span className="inline-block px-3 py-1 rounded-full bg-amber-400 text-gray-950 text-xs font-black">
+                Yeni Çiftlik Katılımı
               </span>
-              <h3 className="text-base sm:text-xl font-black">
-                {t.farmsSection.producerCallTitle}
+              <h3 className="text-lg sm:text-2xl font-black">
+                Siz de Alanya'da Süt Üreticisi misiniz?
               </h3>
-              <p className="text-emerald-200 text-xs max-w-lg">
-                {t.farmsSection.producerCallDesc}
+              <p className="text-gray-300 text-xs sm:text-sm max-w-lg">
+                Çiftliğinizi platformumuza ekleyerek doğrudan Alanya'daki binlerce aileye ulaşın.
               </p>
             </div>
             <a
               href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent("Merhaba, ben Alanya'da süt üreticisiyim. Çiftliğimi platforma eklemek istiyorum.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-black text-xs shrink-0 shadow-md transition active:scale-95 whitespace-nowrap"
+              className="w-full sm:w-auto text-center px-7 py-3.5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-gray-950 font-black text-sm shrink-0 shadow-lg shadow-amber-500/20 transition active:scale-95 whitespace-nowrap cursor-pointer"
             >
-              {t.farmsSection.producerCallBtn}
+              Çiftliğinizi Ekleyin →
             </a>
           </div>
 
@@ -598,44 +500,44 @@ export default function HomePage() {
         {/* ========================================================= */}
         {/* NASIL ÇALIŞIR? BÖLÜMÜ                                     */}
         {/* ========================================================= */}
-        <section id="nasil-calisir" className="py-12 sm:py-16 bg-white border-y border-gray-100">
+        <section id="nasil-calisir" className="py-12 sm:py-20 bg-white border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-              <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest block mb-1.5">
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+              <span className="text-xs font-bold text-emerald-800 uppercase tracking-widest block mb-1.5">
                 {t.howItWorks.tag}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-gray-950">
+              <h2 className="text-2xl sm:text-4xl font-black text-gray-950">
                 {t.howItWorks.title}
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
-              <div className="p-5 sm:p-6 rounded-2xl bg-[#F7FAF8] border border-gray-100 text-center space-y-2.5">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#F8FAFC] border border-gray-100 text-center space-y-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-400 text-gray-950 flex items-center justify-center mx-auto font-black text-lg sm:text-xl shadow-md shadow-amber-400/20">
                   1
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step1Title}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">
+                <h3 className="font-black text-base sm:text-lg text-gray-950">{t.howItWorks.step1Title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   {t.howItWorks.step1Desc}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-[#F7FAF8] border border-gray-100 text-center space-y-2.5">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#F8FAFC] border border-gray-100 text-center space-y-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#F59E0B] text-gray-950 flex items-center justify-center mx-auto font-black text-lg sm:text-xl shadow-md shadow-amber-400/20">
                   2
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step2Title}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">
+                <h3 className="font-black text-base sm:text-lg text-gray-950">{t.howItWorks.step2Title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   {t.howItWorks.step2Desc}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-2xl bg-[#F7FAF8] border border-gray-100 text-center space-y-2.5">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center mx-auto font-black text-base sm:text-lg shadow-xs">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#F8FAFC] border border-gray-100 text-center space-y-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-800 text-white flex items-center justify-center mx-auto font-black text-lg sm:text-xl shadow-md shadow-emerald-800/20">
                   3
                 </div>
-                <h3 className="font-black text-sm sm:text-base text-gray-950">{t.howItWorks.step3Title}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">
+                <h3 className="font-black text-base sm:text-lg text-gray-950">{t.howItWorks.step3Title}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   {t.howItWorks.step3Desc}
                 </p>
               </div>
@@ -652,7 +554,7 @@ export default function HomePage() {
         <section className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 uppercase tracking-wider mb-1.5">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 uppercase tracking-wider mb-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Alanya Süt Rehberi & Blog</span>
               </div>
@@ -665,7 +567,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/blog"
-              className="mt-3 sm:mt-0 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-900 transition"
+              className="mt-3 sm:mt-0 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition"
             >
               <span>Tüm Yazıları Gör ({BLOG_POSTS.length})</span>
               <ArrowRight className="w-4 h-4" />
@@ -711,7 +613,7 @@ export default function HomePage() {
                 <div className="p-4 sm:p-6 pt-0">
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 group-hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 group-hover:underline"
                   >
                     <span>Devamını Oku</span>
                     <ArrowRight className="w-3.5 h-3.5" />

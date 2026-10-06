@@ -178,7 +178,7 @@ export default function PhoneMockup({ onOpenOrder }: PhoneMockupProps) {
                 <span className="text-gray-500 text-[9px]">Jersey İnek Sütü</span>
                 <span className="text-[9px] text-gray-400 ml-1">5 LT</span>
               </div>
-              <span className="font-black text-emerald-800 text-xs">700 TL</span>
+              <span className="font-black text-emerald-800 text-xs">Günlük Taze</span>
             </div>
 
             <button
@@ -207,7 +207,7 @@ export default function PhoneMockup({ onOpenOrder }: PhoneMockupProps) {
                   <span>Oba, Alanya</span>
                 </div>
               </div>
-              <span className="font-black text-emerald-800 text-xs">625 TL</span>
+              <span className="font-black text-emerald-800 text-xs">Günlük Taze</span>
             </div>
 
             <div className="flex items-center justify-between text-[8px]">
