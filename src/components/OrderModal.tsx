@@ -163,13 +163,13 @@ export default function OrderModal({ isOpen, onClose, selectedProductId }: Order
         {/* Başlık Barı */}
         <div className="bg-[#0b1b16] text-white px-5 py-4 flex items-center justify-between border-b border-emerald-900/40">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/10 p-0.5 border border-white/20 shrink-0 flex items-center justify-center">
+            <div className="relative w-10 h-10 shrink-0 flex items-center justify-center">
               <Image
-                src="/logo.png"
+                src="/logo-emblem.png"
                 alt="Alanya Günlük Süt Logo"
-                fill
-                sizes="40px"
-                className="object-contain p-0.5"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain filter drop-shadow"
               />
             </div>
             <div>

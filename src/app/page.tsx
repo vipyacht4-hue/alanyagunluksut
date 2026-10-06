@@ -134,13 +134,13 @@ export default function HomePage() {
                   {/* Marka Header */}
                   <div className="flex items-center justify-between pb-2 border-b border-white/10">
                     <div className="flex items-center gap-2.5">
-                      <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-white/10 border border-white/20 shrink-0 flex items-center justify-center">
+                      <div className="relative w-8 h-8 shrink-0 flex items-center justify-center">
                         <Image
-                          src="/logo.png"
+                          src="/logo-emblem.png"
                           alt="Alanya Günlük Süt Logo"
-                          fill
-                          sizes="32px"
-                          className="object-contain p-0.5"
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-contain filter drop-shadow-sm"
                         />
                       </div>
                       <span className="text-xs font-black text-white tracking-wide">
