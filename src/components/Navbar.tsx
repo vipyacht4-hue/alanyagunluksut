@@ -23,14 +23,14 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           
           {/* Logo & Marka */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl overflow-hidden bg-white/10 border border-white/20 shadow-md shadow-amber-400/20 group-hover:scale-105 transition-transform shrink-0 flex items-center justify-center">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 shrink-0 group py-1">
+            <div className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white shadow-md shadow-black/25 border border-white/90 p-1 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform">
               <Image
                 src="/logo.png"
                 alt="Alanya Günlük Süt Logosu"
-                fill
-                sizes="(max-width: 640px) 40px, 48px"
-                className="object-contain p-0.5"
+                width={56}
+                height={56}
+                className="w-full h-full object-contain"
                 priority
               />
             </div>
@@ -104,7 +104,23 @@ export default function Navbar({ onOpenOrderModal }: NavbarProps) {
 
       {/* Mobil Açılır Menü */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-t border-gray-100 bg-white px-4 pt-3 pb-5 space-y-2.5 shadow-xl animate-fadeIn">
+        <div className="xl:hidden border-t border-gray-100 bg-white px-4 pt-4 pb-5 space-y-2.5 shadow-xl animate-fadeIn text-gray-900">
+          <div className="flex items-center gap-3 pb-3 mb-2 border-b border-gray-100">
+            <div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-gray-200 p-1 shrink-0 flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                alt="Alanya Günlük Süt"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <span className="font-black text-sm text-gray-900 block">Alanya Günlük Süt</span>
+              <span className="text-[11px] text-amber-600 font-bold block">Çiftlikten Kapınıza Taze</span>
+            </div>
+          </div>
+
           <div className="relative mb-2">
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
