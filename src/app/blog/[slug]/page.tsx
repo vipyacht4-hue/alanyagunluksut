@@ -60,11 +60,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         },
       ],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
+    alternates: {
+      canonical: `https://www.alanyagunluksut.com/blog/${post.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
