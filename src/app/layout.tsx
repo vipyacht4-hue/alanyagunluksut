@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { CONTACT_INFO } from "@/data/products";
 import { LanguageProvider } from "@/context/LanguageContext";
+import MaintenancePage from "@/components/MaintenancePage";
+import { MAINTENANCE_MODE } from "@/config/site";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -113,9 +115,11 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased selection:bg-emerald-100 selection:text-emerald-900 overflow-x-hidden w-full max-w-full">
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        {MAINTENANCE_MODE ? (
+          <MaintenancePage />
+        ) : (
+          <LanguageProvider>{children}</LanguageProvider>
+        )}
       </body>
     </html>
   );
